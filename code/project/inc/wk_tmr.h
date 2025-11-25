@@ -60,8 +60,8 @@ extern "C" {
   /* init tmr1 function. */
   void wk_tmr1_init(void);
 
-  /* init tmr3 function. */
-  void wk_tmr3_init(void);
+  /* init tmr9 function. */
+  void wk_tmr9_init(void);
 
 /* add user code begin exported functions */
 

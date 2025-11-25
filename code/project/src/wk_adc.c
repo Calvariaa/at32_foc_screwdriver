@@ -86,14 +86,14 @@ void wk_adc2_init(void)
   /* add user code end adc2_init 1 */
 
   /*gpio--------------------------------------------------------------------*/ 
+  /* configure the IN0 pin */
+  gpio_init_struct.gpio_mode = GPIO_MODE_ANALOG;
+  gpio_init_struct.gpio_pins = GPIO_PINS_0;
+  gpio_init(GPIOA, &gpio_init_struct);
+
   /* configure the IN1 pin */
   gpio_init_struct.gpio_mode = GPIO_MODE_ANALOG;
   gpio_init_struct.gpio_pins = GPIO_PINS_1;
-  gpio_init(GPIOA, &gpio_init_struct);
-
-  /* configure the IN3 pin */
-  gpio_init_struct.gpio_mode = GPIO_MODE_ANALOG;
-  gpio_init_struct.gpio_pins = GPIO_PINS_3;
   gpio_init(GPIOA, &gpio_init_struct);
 
   /* configure the IN4 pin */
@@ -117,7 +117,7 @@ void wk_adc2_init(void)
   adc_resolution_set(ADC2, ADC_RESOLUTION_12B);
 
   /* adc_ordinary_conversionmode---------------------------------------------------- */
-  adc_ordinary_channel_set(ADC2, ADC_CHANNEL_1, 1, ADC_SAMPLETIME_1_5);
+  adc_ordinary_channel_set(ADC2, ADC_CHANNEL_0, 1, ADC_SAMPLETIME_1_5);
 
   adc_ordinary_conversion_trigger_set(ADC2, ADC_ORDINARY_TRIG_TMR1CH1, ADC_ORDINARY_TRIG_EDGE_NONE);
 

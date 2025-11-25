@@ -171,9 +171,6 @@ void wk_periph_clock_config(void)
   /* enable gpiof periph clock */
   crm_periph_clock_enable(CRM_GPIOF_PERIPH_CLOCK, TRUE);
 
-  /* enable tmr3 periph clock */
-  crm_periph_clock_enable(CRM_TMR3_PERIPH_CLOCK, TRUE);
-
   /* enable usart2 periph clock */
   crm_periph_clock_enable(CRM_USART2_PERIPH_CLOCK, TRUE);
 
@@ -185,6 +182,9 @@ void wk_periph_clock_config(void)
 
   /* enable adc2 periph clock */
   crm_periph_clock_enable(CRM_ADC2_PERIPH_CLOCK, TRUE);
+
+  /* enable tmr9 periph clock */
+  crm_periph_clock_enable(CRM_TMR9_PERIPH_CLOCK, TRUE);
 }
 
 /**
@@ -203,7 +203,6 @@ void wk_nvic_config(void)
   NVIC_SetPriority(DebugMonitor_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 0, 0));
   NVIC_SetPriority(PendSV_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 0, 0));
   NVIC_SetPriority(SysTick_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 15, 0));
-  nvic_irq_enable(TMR1_BRK_TMR9_IRQn, 0, 0);
   nvic_irq_enable(TMR1_OVF_TMR10_IRQn, 0, 0);
   nvic_irq_enable(TMR1_TRG_HALL_TMR11_IRQn, 0, 0);
 }

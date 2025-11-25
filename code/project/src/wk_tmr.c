@@ -204,7 +204,6 @@ void wk_tmr1_init(void)
    * 1. Call the below function to enable the corresponding TMR1 interrupt.
    *     --tmr_interrupt_enable(...)
    * 2. Add the user's interrupt handler code into the below function in the at32m412_416_int.c file.
-   *     --void TMR1_BRK_TMR9_IRQHandler(void)
    *     --void TMR1_OVF_TMR10_IRQHandler(void)
    *     --void TMR1_TRG_HALL_TMR11_IRQHandler(void)
    */
@@ -215,73 +214,74 @@ void wk_tmr1_init(void)
 }
 
 /**
-  * @brief  init tmr3 function.
+  * @brief  init tmr9 function.
   * @param  none
   * @retval none
   */
-void wk_tmr3_init(void)
+void wk_tmr9_init(void)
 {
-  /* add user code begin tmr3_init 0 */
+  /* add user code begin tmr9_init 0 */
 
-  /* add user code end tmr3_init 0 */
+  /* add user code end tmr9_init 0 */
 
   gpio_init_type gpio_init_struct;
   tmr_input_config_type  tmr_input_struct;
 
   gpio_default_para_init(&gpio_init_struct);
 
-  /* add user code begin tmr3_init 1 */
+  /* add user code begin tmr9_init 1 */
 
-  /* add user code end tmr3_init 1 */
+  /* add user code end tmr9_init 1 */
 
-  /* configure the tmr3 CH1 pin */
-  gpio_pin_mux_config(GPIOB, GPIO_PINS_SOURCE4, GPIO_MUX_2);
-  gpio_init_struct.gpio_pins = GPIO_PINS_4;
+  /* configure the tmr9 CH1 pin */
+  gpio_pin_mux_config(GPIOA, GPIO_PINS_SOURCE2, GPIO_MUX_3);
+  gpio_init_struct.gpio_pins = GPIO_PINS_2;
   gpio_init_struct.gpio_mode = GPIO_MODE_MUX;
   gpio_init_struct.gpio_out_type = GPIO_OUTPUT_PUSH_PULL;
   gpio_init_struct.gpio_pull = GPIO_PULL_NONE;
   gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_MODERATE;
-  gpio_init(GPIOB, &gpio_init_struct);
+  gpio_init(GPIOA, &gpio_init_struct);
 
-  /* configure the tmr3 CH2 pin */
-  gpio_pin_mux_config(GPIOB, GPIO_PINS_SOURCE5, GPIO_MUX_2);
-  gpio_init_struct.gpio_pins = GPIO_PINS_5;
+  /* configure the tmr9 CH2 pin */
+  gpio_pin_mux_config(GPIOA, GPIO_PINS_SOURCE3, GPIO_MUX_3);
+  gpio_init_struct.gpio_pins = GPIO_PINS_3;
   gpio_init_struct.gpio_mode = GPIO_MODE_MUX;
   gpio_init_struct.gpio_out_type = GPIO_OUTPUT_PUSH_PULL;
   gpio_init_struct.gpio_pull = GPIO_PULL_NONE;
   gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_MODERATE;
-  gpio_init(GPIOB, &gpio_init_struct);
+  gpio_init(GPIOA, &gpio_init_struct);
 
   /* configure counter settings */
-  tmr_cnt_dir_set(TMR3, TMR_COUNT_UP);
-  tmr_clock_source_div_set(TMR3, TMR_CLOCK_DIV1);
-  tmr_period_buffer_enable(TMR3, FALSE);
-  tmr_base_init(TMR3, 65535, 0);
+  tmr_cnt_dir_set(TMR9, TMR_COUNT_UP);
+  tmr_clock_source_div_set(TMR9, TMR_CLOCK_DIV1);
+  tmr_repetition_counter_set(TMR9, 0);
+  tmr_period_buffer_enable(TMR9, FALSE);
+  tmr_base_init(TMR9, 65535, 0);
 
   /* configure primary mode settings */
-  tmr_sub_sync_mode_set(TMR3, FALSE);
-  tmr_primary_mode_select(TMR3, TMR_PRIMARY_SEL_RESET);
+  tmr_sub_sync_mode_set(TMR9, FALSE);
+  tmr_primary_mode_select(TMR9, TMR_PRIMARY_SEL_RESET);
 
   /* configure encoder mode */
   tmr_input_struct.input_channel_select = TMR_SELECT_CHANNEL_1;
   tmr_input_struct.input_mapped_select = TMR_CC_CHANNEL_MAPPED_DIRECT;
   tmr_input_struct.input_polarity_select = TMR_INPUT_RISING_EDGE;
   tmr_input_struct.input_filter_value = 0;
-  tmr_input_channel_init(TMR3, &tmr_input_struct, TMR_CHANNEL_INPUT_DIV_1);
+  tmr_input_channel_init(TMR9, &tmr_input_struct, TMR_CHANNEL_INPUT_DIV_1);
 
   tmr_input_struct.input_channel_select = TMR_SELECT_CHANNEL_2;
   tmr_input_struct.input_mapped_select = TMR_CC_CHANNEL_MAPPED_DIRECT;
   tmr_input_struct.input_polarity_select = TMR_INPUT_RISING_EDGE;
   tmr_input_struct.input_filter_value = 0;
-  tmr_input_channel_init(TMR3, &tmr_input_struct, TMR_CHANNEL_INPUT_DIV_1);
+  tmr_input_channel_init(TMR9, &tmr_input_struct, TMR_CHANNEL_INPUT_DIV_1);
 
-  tmr_encoder_mode_config(TMR3, TMR_ENCODER_MODE_A, TMR_INPUT_RISING_EDGE, TMR_INPUT_RISING_EDGE);
+  tmr_encoder_mode_config(TMR9, TMR_ENCODER_MODE_A, TMR_INPUT_RISING_EDGE, TMR_INPUT_RISING_EDGE);
 
-  tmr_counter_enable(TMR3, TRUE);
+  tmr_counter_enable(TMR9, TRUE);
 
-  /* add user code begin tmr3_init 2 */
+  /* add user code begin tmr9_init 2 */
 
-  /* add user code end tmr3_init 2 */
+  /* add user code end tmr9_init 2 */
 }
 
 /* add user code begin 1 */

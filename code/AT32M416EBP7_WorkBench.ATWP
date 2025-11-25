@@ -134,7 +134,7 @@
     </PINInfo>
     <ProjectInfomation>
         <ProjectName>AT32M416EBP7_WorkBench</ProjectName>
-        <ProjectLocation>C:/Users/Calvaria/Documents/Code/at32_foc_screw/code</ProjectLocation>
+        <ProjectLocation>C:/Users/Calvaria/Documents/Code/AT32/at32_foc_screw/code</ProjectLocation>
         <ToolchainIDE>CMake</ToolchainIDE>
         <ARMCompiler>0</ARMCompiler>
         <KeepUserCode>true</KeepUserCode>

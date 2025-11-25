@@ -109,8 +109,8 @@ int main(void)
   /* init tmr1 function. */
   wk_tmr1_init();
 
-  /* init tmr3 function. */
-  wk_tmr3_init();
+  /* init tmr9 function. */
+  wk_tmr9_init();
 
   /* add user code begin 2 */
 

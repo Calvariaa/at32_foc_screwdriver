@@ -222,23 +222,6 @@ void SysTick_Handler(void)
 }
 
 /**
-  * @brief  this function handles TMR1 Brake and TMR9 handler.
-  * @param  none
-  * @retval none
-  */
-void TMR1_BRK_TMR9_IRQHandler(void)
-{
-  /* add user code begin TMR1_BRK_TMR9_IRQ 0 */
-
-  /* add user code end TMR1_BRK_TMR9_IRQ 0 */
-
-
-  /* add user code begin TMR1_BRK_TMR9_IRQ 1 */
-
-  /* add user code end TMR1_BRK_TMR9_IRQ 1 */
-}
-
-/**
   * @brief  this function handles TMR1 Overflow and TMR10 handler.
   * @param  none
   * @retval none
