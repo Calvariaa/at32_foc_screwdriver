@@ -3,7 +3,7 @@
   * @file     at32m412_416_conf.h
   * @brief    at32m412_416 config header file
   **************************************************************************
-  *                       Copyright notice & Disclaimer
+  * Copyright (c) 2025, Artery Technology, All rights reserved.
   *
   * The software Board Support Package (BSP) that is made available to
   * download from Artery official website is the copyrighted work of Artery.
@@ -58,7 +58,7 @@ extern "C" {
 #define CRM_MODULE_ENABLED
 /*#define DAC_MODULE_ENABLED----------------------*/
 #define DEBUG_MODULE_ENABLED
-/*#define DMA_MODULE_ENABLED----------------------*/
+#define DMA_MODULE_ENABLED
 /*#define ERTC_MODULE_ENABLED---------------------*/
 /*#define EXINT_MODULE_ENABLED--------------------*/
 #define FLASH_MODULE_ENABLED

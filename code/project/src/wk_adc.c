@@ -108,17 +108,22 @@ void wk_adc2_init(void)
 
   /* adc_settings------------------------------------------------------------------- */
   adc_base_default_para_init(&adc_base_struct);
-  adc_base_struct.sequence_mode = FALSE;
+  adc_base_struct.sequence_mode = TRUE;
   adc_base_struct.repeat_mode = FALSE;
   adc_base_struct.data_align = ADC_RIGHT_ALIGNMENT;
-  adc_base_struct.ordinary_channel_length = 1;
+  adc_base_struct.ordinary_channel_length = 4;
   adc_base_config(ADC2, &adc_base_struct);
 
   adc_resolution_set(ADC2, ADC_RESOLUTION_12B);
 
   /* adc_ordinary_conversionmode---------------------------------------------------- */
   adc_ordinary_channel_set(ADC2, ADC_CHANNEL_0, 1, ADC_SAMPLETIME_1_5);
+  adc_ordinary_channel_set(ADC2, ADC_CHANNEL_1, 2, ADC_SAMPLETIME_1_5);
+  adc_ordinary_channel_set(ADC2, ADC_CHANNEL_4, 3, ADC_SAMPLETIME_1_5);
+  adc_ordinary_channel_set(ADC2, ADC_CHANNEL_5, 4, ADC_SAMPLETIME_1_5);
 
+  /* When "ADC_ORDINARY_TRIG_EDGE_NONE" is selected, the external trigger source is invalid, and user can only use software trigger. \
+  The software trigger function is adc_ordinary_software_trigger_enable(ADCx, TRUE); */
   adc_ordinary_conversion_trigger_set(ADC2, ADC_ORDINARY_TRIG_TMR1CH1, ADC_ORDINARY_TRIG_EDGE_NONE);
 
   /* add user code begin adc2_init 2 */

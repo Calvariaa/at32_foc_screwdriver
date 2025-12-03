@@ -26,7 +26,6 @@
 
 /* includes ------------------------------------------------------------------*/
 #include "at32m412_416_int.h"
-
 /* private includes ----------------------------------------------------------*/
 /* add user code begin private includes */
 
@@ -215,7 +214,6 @@ void SysTick_Handler(void)
 
   /* add user code end SysTick_IRQ 0 */
 
-
   /* add user code begin SysTick_IRQ 1 */
 
   /* add user code end SysTick_IRQ 1 */
@@ -232,7 +230,6 @@ void TMR1_OVF_TMR10_IRQHandler(void)
 
   /* add user code end TMR1_OVF_TMR10_IRQ 0 */
 
-
   /* add user code begin TMR1_OVF_TMR10_IRQ 1 */
 
   /* add user code end TMR1_OVF_TMR10_IRQ 1 */
@@ -248,7 +245,6 @@ void TMR1_TRG_HALL_TMR11_IRQHandler(void)
   /* add user code begin TMR1_TRG_HALL_TMR11_IRQ 0 */
 
   /* add user code end TMR1_TRG_HALL_TMR11_IRQ 0 */
-
 
   /* add user code begin TMR1_TRG_HALL_TMR11_IRQ 1 */
 

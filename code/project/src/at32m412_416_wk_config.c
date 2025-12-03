@@ -171,6 +171,9 @@ void wk_periph_clock_config(void)
   /* enable gpiof periph clock */
   crm_periph_clock_enable(CRM_GPIOF_PERIPH_CLOCK, TRUE);
 
+  /* enable dma1 periph clock */
+  crm_periph_clock_enable(CRM_DMA1_PERIPH_CLOCK, TRUE);
+
   /* enable usart2 periph clock */
   crm_periph_clock_enable(CRM_USART2_PERIPH_CLOCK, TRUE);
 

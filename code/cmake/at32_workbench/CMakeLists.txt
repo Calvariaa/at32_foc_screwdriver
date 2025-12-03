@@ -29,6 +29,7 @@ set(WK_Application_Src
     ${CMAKE_SOURCE_DIR}/project/src/wk_tmr.c
     ${CMAKE_SOURCE_DIR}/project/src/wk_usart.c
     ${CMAKE_SOURCE_DIR}/project/src/wk_gpio.c
+    ${CMAKE_SOURCE_DIR}/project/src/wk_dma.c
     ${CMAKE_SOURCE_DIR}/startup_at32m412_416.s
 )
 
@@ -42,6 +43,7 @@ set(AT32_Drivers_Src
     ${CMAKE_SOURCE_DIR}/libraries/drivers/src/at32m412_416_usart.c
     ${CMAKE_SOURCE_DIR}/libraries/drivers/src/at32m412_416_pwc.c
     ${CMAKE_SOURCE_DIR}/libraries/drivers/src/at32m412_416_adc.c
+    ${CMAKE_SOURCE_DIR}/libraries/drivers/src/at32m412_416_dma.c
     ${CMAKE_SOURCE_DIR}/libraries/drivers/src/at32m412_416_debug.c
     ${CMAKE_SOURCE_DIR}/libraries/drivers/src/at32m412_416_flash.c
     ${CMAKE_SOURCE_DIR}/libraries/drivers/src/at32m412_416_misc.c

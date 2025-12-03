@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Root>
     <WorkBenchVersion>
-        <Version>V1.2.00</Version>
+        <Version>V1.2.02</Version>
     </WorkBenchVersion>
     <MCUInfo>
         <MCUSerials>AT32M416</MCUSerials>
@@ -25,8 +25,15 @@
             <ModeSub name="IN5" value="TRUE"/>
         </Mode>
         <Parameters>
+            <ParametersSub name="NbrOfOrdinarySequence" value="4"/>
             <ParametersSub name="Channel_OrdinarySequence_1" value="ADC_CHANNEL_0"/>
             <ParametersSub name="SamplingRate_OrdinarySequence_1" value="2.143"/>
+            <ParametersSub name="Channel_OrdinarySequence_2" value="ADC_CHANNEL_1"/>
+            <ParametersSub name="SamplingRate_OrdinarySequence_2" value="2.143"/>
+            <ParametersSub name="Channel_OrdinarySequence_3" value="ADC_CHANNEL_4"/>
+            <ParametersSub name="SamplingRate_OrdinarySequence_3" value="2.143"/>
+            <ParametersSub name="Channel_OrdinarySequence_4" value="ADC_CHANNEL_5"/>
+            <ParametersSub name="SamplingRate_OrdinarySequence_4" value="2.143"/>
         </Parameters>
     </ADC2>
     <DEBUG>
@@ -73,10 +80,18 @@
             <ParametersSub name="RealBaudRate" value="115163"/>
         </Parameters>
     </USART2>
+    <DMA>
+        <ADC2>
+            <ParametersSub name="Instance" value="DMA1_Channel1"/>
+            <ParametersSub name="SyncRequestCount" value="1"/>
+            <ParametersSub name="RequestCount" value="1"/>
+        </ADC2>
+    </DMA>
     <NVIC>
         <SysTick_Handler>1;15;0;0;0</SysTick_Handler>
         <FLASH_IRQHandler>0;0;0;0;0</FLASH_IRQHandler>
         <CRM_IRQHandler>0;0;0;0;0</CRM_IRQHandler>
+        <DMA1_Channel1_IRQHandler>0;0;0;0;0</DMA1_Channel1_IRQHandler>
         <ADC1_2_IRQHandler>0;0;0;0;0</ADC1_2_IRQHandler>
         <TMR1_BRK_TMR9_IRQHandler>0;0;0;0;0</TMR1_BRK_TMR9_IRQHandler>
         <TMR1_OVF_TMR10_IRQHandler>1;0;0;0;0</TMR1_OVF_TMR10_IRQHandler>
@@ -86,6 +101,7 @@
         <I2C1_ERR_IRQHandler>0;0;0;0;0</I2C1_ERR_IRQHandler>
         <USART2_IRQHandler>0;0;0;0;0</USART2_IRQHandler>
         <FPU_IRQHandler>0;0;0;0;0</FPU_IRQHandler>
+        <DMAMUX_IRQHandler>0;0;0;0;0</DMAMUX_IRQHandler>
     </NVIC>
     <ClockConfiguration>
         <rtcsel>0</rtcsel>
@@ -134,7 +150,7 @@
     </PINInfo>
     <ProjectInfomation>
         <ProjectName>AT32M416EBP7_WorkBench</ProjectName>
-        <ProjectLocation>C:/Users/Calvaria/Documents/Code/AT32/at32_foc_screw/code</ProjectLocation>
+        <ProjectLocation>C:/Users/Calvaria/Documents/Code/AT32/at32_foc_screwdriver/code</ProjectLocation>
         <ToolchainIDE>CMake</ToolchainIDE>
         <ARMCompiler>0</ARMCompiler>
         <KeepUserCode>true</KeepUserCode>
@@ -144,6 +160,6 @@
         <MinHeapSize>0x200</MinHeapSize>
         <MinStackSize>0x400</MinStackSize>
         <UseFirmware>true</UseFirmware>
-        <PackageVersion>V2.0.2</PackageVersion>
+        <PackageVersion>V2.0.3</PackageVersion>
     </ProjectInfomation>
 </Root>
