@@ -134,6 +134,7 @@ int main(void)
   }
   char dat[32];
 
+  foc_init(&foc_motor, TMR1);
   mos_init(TMR1);
   /* add user code end 2 */
 
@@ -143,30 +144,38 @@ int main(void)
     gpio_bits_toggle(GPIOB, GPIO_PINS_8);
 
     foc_control(&foc_motor, 0);
-    ssd1306_Clear();
-    ssd1306_SetColor(White);
+    // mos_all_set(TMR1, 2812, 2812, 2812);
 
-    ssd1306_SetCursor(0, 0);
-    sprintf(dat, "GPIO:");
-    ssd1306_WriteString(dat, Font_7x10);
+    // ssd1306_Clear();
+    // ssd1306_SetColor(White);
+    //
+    // ssd1306_SetCursor(0, 0);
+    // sprintf(dat, "GPIO:");
+    // ssd1306_WriteString(dat, Font_7x10);
+    //
+    // // 显示GPIO状态
+    // ssd1306_SetCursor(0, 0 * Font_7x10.FontHeight);
+    // int32_t count = encoder_pulse_data;
+    // sprintf(dat, "ENC: %ld", count);
+    // ssd1306_WriteString(dat, Font_7x10);
+    //
+    // ssd1306_SetCursor(0, 1 * Font_7x10.FontHeight);
+    // ssd1306_WriteFloat(foc_motor.set_angle, 1, 3, Font_7x10);
+    // ssd1306_WriteString(dat, Font_7x10);
+    //
+    // ssd1306_SetCursor(0 * Font_7x10.FontWidth, 2 * Font_7x10.FontHeight);
+    // ssd1306_WriteFloat(foc_motor.sector, 4, 1, Font_7x10);
+    // // ssd1306_WriteFloat(foc_motor.sector_voltage.a, 2, 1, Font_7x10);
+    // // ssd1306_SetCursor(6 * Font_7x10.FontWidth, 2 * Font_7x10.FontHeight);
+    // // ssd1306_WriteFloat(foc_motor.sector_voltage.b, 2, 1, Font_7x10);
+    // // ssd1306_SetCursor(12 * Font_7x10.FontWidth, 2 * Font_7x10.FontHeight);
+    // // ssd1306_WriteFloat(foc_motor.sector_voltage.c, 2, 1, Font_7x10);
+    // ssd1306_WriteString(dat, Font_7x10);
+    //
+    // ssd1306_UpdateScreen();
 
-    // 显示GPIO状态
-    ssd1306_SetCursor(0, 0 * Font_7x10.FontHeight);
-    sprintf(dat, "PB5:%d PA2:%d PA3:%d",
-            gpio_input_data_bit_read(ENC_PUSH_GPIO_PORT, ENC_PUSH_PIN),
-            gpio_input_data_bit_read(ENC_A_GPIO_PORT, ENC_A_PIN),
-            gpio_input_data_bit_read(ENC_B_GPIO_PORT, ENC_B_PIN));
-    ssd1306_WriteString(dat, Font_7x10);
-    // 显示计数器值
-    ssd1306_SetCursor(0, 1 * Font_7x10.FontHeight);
-    int32_t count = encoder_pulse_data;
-    sprintf(dat, "ENC: %ld", count);
-    ssd1306_WriteString(dat, Font_7x10);
 
-    ssd1306_UpdateScreen();
-
-
-    // wk_delay_ms(100);
+    // wk_delay_ms(1);
     /* add user code end 3 */
   }
 }

@@ -9,8 +9,8 @@
 
 #include "at32m412_416_tmr.h"
 
-#define ANGLE_TO_RAD(x)     ( (x) * (float)M_PI / 180 )                           // 角度转换为弧度
-#define RAD_TO_ANGLE(x)     ( (x) * 180 / (float)M_PI )                           // 弧度转换为角度
+#define ANGLE_TO_RAD(x)     ( (x) * M_PI / 180 )                           // 角度转换为弧度
+#define RAD_TO_ANGLE(x)     ( (x) * 180 / M_PI )                           // 弧度转换为角度
 
 typedef struct {
         float a;
@@ -50,5 +50,9 @@ void foc_init(foc_t *_foc, tmr_type *_htim);
 void foc_control(foc_t *_foc, int32_t now_encoder_data);
 
 void mos_init(tmr_type *_htim);
+
+void mos_all_set(tmr_type *_htim, uint32_t _cmp_u, uint32_t _cmp_v, uint32_t _cmp_w);
+
+void mos_all_close(tmr_type *_htim);
 
 #endif //SIMPLEFOC_STM32F431_FOC_H

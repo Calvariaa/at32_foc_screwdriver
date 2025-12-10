@@ -40,7 +40,7 @@ motor_t i_clark(const static_vector_t _static_vector) {
   motor_t motor;
   motor.a = _static_vector.alpha;
   motor.b = _static_vector.beta * (float) M_SQRT3 / 2 - _static_vector.alpha / 2;
-  motor.c = _static_vector.beta * (float) M_SQRT3 / 2 - _static_vector.alpha / 2;
+  motor.c = -_static_vector.beta * (float) M_SQRT3 / 2 - _static_vector.alpha / 2;
   return motor;
 }
 
@@ -158,7 +158,7 @@ void foc_init(foc_t *_foc, tmr_type *_htim) {
 
 void foc_control(foc_t *_foc, int32_t now_encoder_data) {
   // _foc->set_angle += ANGLE_TO_RAD(0.4);
-  _foc->set_angle += ANGLE_TO_RAD(0.08f);
+  _foc->set_angle += (float)ANGLE_TO_RAD(0.002);
   if (_foc->set_angle >= M_PI * 2) {
     _foc->expect_rotations++;
     _foc->set_angle -= M_PI * 2;
@@ -169,7 +169,7 @@ void foc_control(foc_t *_foc, int32_t now_encoder_data) {
   }
 
   _foc->turn_vector.i_d = 0;
-  _foc->turn_vector.i_q = 0.1f;
+  _foc->turn_vector.i_q = 6.0f;
 
   _foc->i_park_vector = i_park(_foc->turn_vector, _foc->set_angle);
   _foc->sector_voltage = i_clark(_foc->i_park_vector);

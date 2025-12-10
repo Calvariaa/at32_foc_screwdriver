@@ -72,6 +72,7 @@
             <ModeSub name="Channel2 mode" value="Output_CH2_CH2C"/>
             <ModeSub name="Channel3 mode" value="Output_CH3_CH3C"/>
             <ModeSub name="Channel4 mode" value="Output_without_pin"/>
+            <ModeSub name="Clock selection" value="Internal"/>
             <ModeSub name="Activated" value="TRUE"/>
             <ModeSub name="Enable BRK pin" value="TRUE"/>
         </Mode>
@@ -79,6 +80,9 @@
             <ParametersSub name="Period" value="5624"/>
             <ParametersSub name="DeadTime" value="54"/>
             <ParametersSub name="DeadTimeValue" value="300"/>
+            <ParametersSub name="OCMode_1" value="TMR_OUTPUT_CONTROL_PWM_MODE_A"/>
+            <ParametersSub name="OCMode_2" value="TMR_OUTPUT_CONTROL_PWM_MODE_A"/>
+            <ParametersSub name="OCMode_3" value="TMR_OUTPUT_CONTROL_PWM_MODE_A"/>
             <ParametersSub name="ChannelData_4" value="2812"/>
         </Parameters>
         <Interrupts>
