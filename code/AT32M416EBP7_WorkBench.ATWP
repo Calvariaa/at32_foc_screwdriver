@@ -71,6 +71,9 @@
             <ModeSub name="Multi-Channels" value="Encoder_Mode"/>
             <ModeSub name="Activated" value="TRUE"/>
         </Mode>
+        <Parameters>
+            <ParametersSub name="EncoderMode" value="TMR_ENCODER_MODE_C"/>
+        </Parameters>
     </TMR9>
     <USART2>
         <Mode>

@@ -32,7 +32,10 @@ message("Build type: " ${CMAKE_BUILD_TYPE})
 enable_language(C ASM)
 
 # Create an executable object type
-add_executable(${CMAKE_PROJECT_NAME})
+add_executable(${CMAKE_PROJECT_NAME}
+        project/src/ssd1306.c
+        project/src/fonts.c
+        middlewares/i2c_application_library/i2c_application.c)
 
 # Add at32_workbench generated sources
 add_subdirectory(cmake/at32_workbench)

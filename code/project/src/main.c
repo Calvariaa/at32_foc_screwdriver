@@ -36,6 +36,7 @@
 
 /* private includes ----------------------------------------------------------*/
 /* add user code begin private includes */
+#include "ssd1306.h"
 
 /* add user code end private includes */
 
@@ -124,6 +125,10 @@ int main(void)
   wk_tmr9_init();
 
   /* add user code begin 2 */
+  hi2c1.i2cx = SSD1306_I2C_BASE;
+  while (ssd1306_Init()) {
+  }
+  char dat[32];
 
   /* add user code end 2 */
 
@@ -132,7 +137,32 @@ int main(void)
     /* add user code begin 3 */
     gpio_bits_toggle(GPIOB, GPIO_PINS_8);
     printf("Hello World\r\n");
-    wk_delay_ms(100);
+
+    ssd1306_Clear();
+    ssd1306_SetColor(White);
+
+    ssd1306_SetCursor(0, 0);
+    sprintf(dat, "GPIO:");
+    ssd1306_WriteString(dat, Font_7x10);
+
+    // 显示GPIO状态
+    ssd1306_SetCursor(0, 0 * Font_7x10.FontHeight);
+    sprintf(dat, "PB5:%d PA2:%d PA3:%d",
+            gpio_input_data_bit_read(GPIOB, GPIO_PINS_5),
+            gpio_input_data_bit_read(GPIOA, GPIO_PINS_2),
+            gpio_input_data_bit_read(GPIOA, GPIO_PINS_3));
+    ssd1306_WriteString(dat, Font_7x10);
+
+    // 显示计数器值
+    ssd1306_SetCursor(0, 1 * Font_7x10.FontHeight);
+    int32_t count = (int32_t)tmr_counter_value_get(TMR9);
+    sprintf(dat, "TMR9: %ld", count);
+    ssd1306_WriteString(dat, Font_7x10);
+
+    ssd1306_UpdateScreen();
+
+
+    // wk_delay_ms(100);
     /* add user code end 3 */
   }
 }

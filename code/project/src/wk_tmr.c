@@ -266,12 +266,12 @@ void wk_tmr9_init(void)
   tmr_input_struct.input_filter_value = 0;
   tmr_input_channel_init(TMR9, &tmr_input_struct, TMR_CHANNEL_INPUT_DIV_1);
 
-  tmr_encoder_mode_config(TMR9, TMR_ENCODER_MODE_A, TMR_INPUT_RISING_EDGE, TMR_INPUT_RISING_EDGE);
+  tmr_encoder_mode_config(TMR9, TMR_ENCODER_MODE_C, TMR_INPUT_RISING_EDGE, TMR_INPUT_RISING_EDGE);
 
   tmr_counter_enable(TMR9, TRUE);
 
   /* add user code begin tmr9_init 2 */
-
+  
   /* add user code end tmr9_init 2 */
 }
 
