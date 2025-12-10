@@ -13,7 +13,6 @@
             <ModeSub name="Activated" value="TRUE"/>
         </Mode>
         <Parameters>
-            <ParametersSub name="Mode" value="ADC_ORDINARY_SMLT_ONLY_ONESLAVE_MODE"/>
             <ParametersSub name="Clock" value="30000000"/>
         </Parameters>
     </ADC-Common>
@@ -25,6 +24,9 @@
             <ModeSub name="IN5" value="TRUE"/>
         </Mode>
         <Parameters>
+            <ParametersSub name="EnableOrdinaryConversion" value="ENABLE"/>
+            <ParametersSub name="OrdinaryTriggerSource" value="ADC_ORDINARY_TRIG_TMR1CH4"/>
+            <ParametersSub name="OrdinaryExternalTriggerEdge" value="ADC_ORDINARY_TRIG_EDGE_RISING"/>
             <ParametersSub name="NbrOfOrdinarySequence" value="4"/>
             <ParametersSub name="Channel_OrdinarySequence_1" value="ADC_CHANNEL_0"/>
             <ParametersSub name="SamplingRate_OrdinarySequence_1" value="2.143"/>
@@ -78,11 +80,18 @@
         </Mode>
         <Parameters>
             <ParametersSub name="Period" value="5624"/>
+            <ParametersSub name="BreakState" value="TRUE"/>
+            <ParametersSub name="BreakInputFilter" value="15"/>
+            <ParametersSub name="BreakInputFilter_Frequency" value="351562"/>
+            <ParametersSub name="BreakSource_BRK_pin" value="TRUE"/>
+            <ParametersSub name="BreakSource_BRK_pin_validity" value="TMR_BRKIN_SRC_POL_LOW"/>
+            <ParametersSub name="AutomaticOutput" value="TRUE"/>
             <ParametersSub name="DeadTime" value="54"/>
             <ParametersSub name="DeadTimeValue" value="300"/>
             <ParametersSub name="OCMode_1" value="TMR_OUTPUT_CONTROL_PWM_MODE_A"/>
             <ParametersSub name="OCMode_2" value="TMR_OUTPUT_CONTROL_PWM_MODE_A"/>
             <ParametersSub name="OCMode_3" value="TMR_OUTPUT_CONTROL_PWM_MODE_A"/>
+            <ParametersSub name="OCMode_4" value="TMR_OUTPUT_CONTROL_PWM_MODE_B"/>
             <ParametersSub name="ChannelData_4" value="2812"/>
         </Parameters>
         <Interrupts>
@@ -107,6 +116,7 @@
             <ParametersSub name="Instance" value="DMA1_Channel1"/>
             <ParametersSub name="SyncRequestCount" value="1"/>
             <ParametersSub name="RequestCount" value="1"/>
+            <ParametersSub name="Interrupt_FDT" value="ENABLE"/>
         </ADC2>
     </DMA>
     <NVIC>
@@ -115,7 +125,7 @@
         <CRM_IRQHandler>0;0;0;0;0</CRM_IRQHandler>
         <EXINT2_IRQHandler>1;0;0;0;0</EXINT2_IRQHandler>
         <EXINT3_IRQHandler>1;0;0;0;0</EXINT3_IRQHandler>
-        <DMA1_Channel1_IRQHandler>0;0;0;0;0</DMA1_Channel1_IRQHandler>
+        <DMA1_Channel1_IRQHandler>1;0;0;0;0</DMA1_Channel1_IRQHandler>
         <ADC1_2_IRQHandler>0;0;0;0;0</ADC1_2_IRQHandler>
         <TMR1_BRK_TMR9_IRQHandler>0;0;0;0;0</TMR1_BRK_TMR9_IRQHandler>
         <TMR1_OVF_TMR10_IRQHandler>1;0;0;0;0</TMR1_OVF_TMR10_IRQHandler>
@@ -134,11 +144,23 @@
         <Signal SignalName="TMR1_CH2C" PinName="PF1">
             <Parameters name="GPIO_DriverCapability" value="GPIO_DRIVE_STRENGTH_STRONGER"/>
         </Signal>
+        <Signal SignalName="ADC2_IN0" PinName="PA0">
+            <Parameters name="Label" value="DRIVER_I"/>
+        </Signal>
+        <Signal SignalName="ADC2_IN1" PinName="PA1">
+            <Parameters name="Label" value="DRIVER_V"/>
+        </Signal>
         <Signal SignalName="EXINT2" PinName="PA2">
             <Parameters name="Label" value="ENC_A"/>
         </Signal>
         <Signal SignalName="EXINT3" PinName="PA3">
             <Parameters name="Label" value="ENC_B"/>
+        </Signal>
+        <Signal SignalName="ADC2_IN4" PinName="PA4">
+            <Parameters name="Label" value="HALL_A"/>
+        </Signal>
+        <Signal SignalName="ADC2_IN5" PinName="PA5">
+            <Parameters name="Label" value="HALL_B"/>
         </Signal>
         <Signal SignalName="TMR1_BRK" PinName="PA6">
             <Parameters name="GPIO_DriverCapability" value="GPIO_DRIVE_STRENGTH_STRONGER"/>
@@ -206,7 +228,7 @@
     </PINInfo>
     <ProjectInfomation>
         <ProjectName>AT32M416EBP7_WorkBench</ProjectName>
-        <ProjectLocation>C:/Users/Calvaria/Documents/Code/AT32/at32_foc_screwdriver/code</ProjectLocation>
+        <ProjectLocation>C:/Users/Calvaria/Documents/Code/at32_foc_screwdriver/code</ProjectLocation>
         <ToolchainIDE>CMake</ToolchainIDE>
         <ARMCompiler>0</ARMCompiler>
         <KeepUserCode>true</KeepUserCode>

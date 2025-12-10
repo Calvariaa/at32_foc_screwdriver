@@ -158,7 +158,7 @@ void foc_init(foc_t *_foc, tmr_type *_htim) {
 
 void foc_control(foc_t *_foc, int32_t now_encoder_data) {
   // _foc->set_angle += ANGLE_TO_RAD(0.4);
-  _foc->set_angle += (float)ANGLE_TO_RAD(0.002);
+  _foc->set_angle += (float)ANGLE_TO_RAD(0.01);
   if (_foc->set_angle >= M_PI * 2) {
     _foc->expect_rotations++;
     _foc->set_angle -= M_PI * 2;

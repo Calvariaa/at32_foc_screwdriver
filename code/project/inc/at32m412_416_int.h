@@ -69,6 +69,7 @@ void SysTick_Handler(void);
 
 void EXINT2_IRQHandler(void);
 void EXINT3_IRQHandler(void);
+void DMA1_Channel1_IRQHandler(void);
 void TMR1_OVF_TMR10_IRQHandler(void);
 void TMR1_TRG_HALL_TMR11_IRQHandler(void);
 void TMR1_CH_IRQHandler(void);

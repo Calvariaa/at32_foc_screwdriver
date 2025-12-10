@@ -28,6 +28,7 @@
 #include "wk_adc.h"
 
 /* add user code begin 0 */
+uint16_t adc_value[DMA1_CHANNEL1_BUFFER_SIZE] = {0};
 
 /* add user code end 0 */
 
@@ -52,7 +53,7 @@ void wk_adc_common_init(void)
 
   /* adc_common_settings------------------------------------------------------------ */
   adc_common_default_para_init(&adc_common_struct);
-  adc_common_struct.combine_mode = ADC_ORDINARY_SMLT_ONLY_ONESLAVE_MODE;
+  adc_common_struct.combine_mode = ADC_INDEPENDENT_MODE;
   adc_common_struct.div = ADC_HCLK_DIV_6;
   adc_common_struct.common_dma_mode = ADC_COMMON_DMAMODE_DISABLE;
   adc_common_struct.common_dma_request_repeat_state = FALSE;
@@ -88,23 +89,23 @@ void wk_adc2_init(void)
   /*gpio--------------------------------------------------------------------*/ 
   /* configure the IN0 pin */
   gpio_init_struct.gpio_mode = GPIO_MODE_ANALOG;
-  gpio_init_struct.gpio_pins = GPIO_PINS_0;
-  gpio_init(GPIOA, &gpio_init_struct);
+  gpio_init_struct.gpio_pins = DRIVER_I_PIN;
+  gpio_init(DRIVER_I_GPIO_PORT, &gpio_init_struct);
 
   /* configure the IN1 pin */
   gpio_init_struct.gpio_mode = GPIO_MODE_ANALOG;
-  gpio_init_struct.gpio_pins = GPIO_PINS_1;
-  gpio_init(GPIOA, &gpio_init_struct);
+  gpio_init_struct.gpio_pins = DRIVER_V_PIN;
+  gpio_init(DRIVER_V_GPIO_PORT, &gpio_init_struct);
 
   /* configure the IN4 pin */
   gpio_init_struct.gpio_mode = GPIO_MODE_ANALOG;
-  gpio_init_struct.gpio_pins = GPIO_PINS_4;
-  gpio_init(GPIOA, &gpio_init_struct);
+  gpio_init_struct.gpio_pins = HALL_A_PIN;
+  gpio_init(HALL_A_GPIO_PORT, &gpio_init_struct);
 
   /* configure the IN5 pin */
   gpio_init_struct.gpio_mode = GPIO_MODE_ANALOG;
-  gpio_init_struct.gpio_pins = GPIO_PINS_5;
-  gpio_init(GPIOA, &gpio_init_struct);
+  gpio_init_struct.gpio_pins = HALL_B_PIN;
+  gpio_init(HALL_B_GPIO_PORT, &gpio_init_struct);
 
   /* adc_settings------------------------------------------------------------------- */
   adc_base_default_para_init(&adc_base_struct);
@@ -124,7 +125,7 @@ void wk_adc2_init(void)
 
   /* When "ADC_ORDINARY_TRIG_EDGE_NONE" is selected, the external trigger source is invalid, and user can only use software trigger. \
   The software trigger function is adc_ordinary_software_trigger_enable(ADCx, TRUE); */
-  adc_ordinary_conversion_trigger_set(ADC2, ADC_ORDINARY_TRIG_TMR1CH1, ADC_ORDINARY_TRIG_EDGE_NONE);
+  adc_ordinary_conversion_trigger_set(ADC2, ADC_ORDINARY_TRIG_TMR1CH4, ADC_ORDINARY_TRIG_EDGE_RISING);
 
   /* add user code begin adc2_init 2 */
 

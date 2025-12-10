@@ -35,8 +35,8 @@ set(WK_Application_Src
     ${CMAKE_SOURCE_DIR}/project/src/wk_tmr.c
     ${CMAKE_SOURCE_DIR}/project/src/wk_usart.c
     ${CMAKE_SOURCE_DIR}/project/src/wk_gpio.c
-    ${CMAKE_SOURCE_DIR}/project/src/wk_dma.c
     ${CMAKE_SOURCE_DIR}/project/src/wk_exint.c
+    ${CMAKE_SOURCE_DIR}/project/src/wk_dma.c
     ${CMAKE_SOURCE_DIR}/startup_at32m412_416.s
     ${CMAKE_SOURCE_DIR}/libraries/cmsis/dsp/Source/BasicMathFunctions/BasicMathFunctions.c
     ${CMAKE_SOURCE_DIR}/libraries/cmsis/dsp/Source/BayesFunctions/BayesFunctions.c

@@ -141,38 +141,40 @@ int main(void)
   while(1)
   {
     /* add user code begin 3 */
-    gpio_bits_toggle(GPIOB, GPIO_PINS_8);
+    // adc_ordinary_software_trigger_enable(ADC2, TRUE);
+    //
+    // while (dma_flag_get(DMA1_FDT1_FLAG) == RESET) {
+    // }
+    // dma_flag_clear(DMA1_FDT1_FLAG);
 
-    foc_control(&foc_motor, 0);
-    // mos_all_set(TMR1, 2812, 2812, 2812);
+    ssd1306_Clear();
+    ssd1306_SetColor(White);
 
-    // ssd1306_Clear();
-    // ssd1306_SetColor(White);
-    //
-    // ssd1306_SetCursor(0, 0);
-    // sprintf(dat, "GPIO:");
-    // ssd1306_WriteString(dat, Font_7x10);
-    //
-    // // 显示GPIO状态
-    // ssd1306_SetCursor(0, 0 * Font_7x10.FontHeight);
-    // int32_t count = encoder_pulse_data;
-    // sprintf(dat, "ENC: %ld", count);
-    // ssd1306_WriteString(dat, Font_7x10);
-    //
-    // ssd1306_SetCursor(0, 1 * Font_7x10.FontHeight);
-    // ssd1306_WriteFloat(foc_motor.set_angle, 1, 3, Font_7x10);
-    // ssd1306_WriteString(dat, Font_7x10);
-    //
-    // ssd1306_SetCursor(0 * Font_7x10.FontWidth, 2 * Font_7x10.FontHeight);
-    // ssd1306_WriteFloat(foc_motor.sector, 4, 1, Font_7x10);
-    // // ssd1306_WriteFloat(foc_motor.sector_voltage.a, 2, 1, Font_7x10);
-    // // ssd1306_SetCursor(6 * Font_7x10.FontWidth, 2 * Font_7x10.FontHeight);
-    // // ssd1306_WriteFloat(foc_motor.sector_voltage.b, 2, 1, Font_7x10);
-    // // ssd1306_SetCursor(12 * Font_7x10.FontWidth, 2 * Font_7x10.FontHeight);
-    // // ssd1306_WriteFloat(foc_motor.sector_voltage.c, 2, 1, Font_7x10);
-    // ssd1306_WriteString(dat, Font_7x10);
-    //
-    // ssd1306_UpdateScreen();
+    ssd1306_SetCursor(0, 0);
+    sprintf(dat, "GPIO:");
+    ssd1306_WriteString(dat, Font_7x10);
+
+    // 显示GPIO状态
+    ssd1306_SetCursor(0, 0 * Font_7x10.FontHeight);
+    int32_t count = encoder_pulse_data;
+    sprintf(dat, "ENC: %ld", count);
+    ssd1306_WriteString(dat, Font_7x10);
+
+    ssd1306_SetCursor(0, 1 * Font_7x10.FontHeight);
+    ssd1306_WriteFloat(foc_motor.set_angle, 1, 3, Font_7x10);
+    ssd1306_WriteFloat(foc_motor.sector, 4, 1, Font_7x10);
+    // ssd1306_WriteFloat(foc_motor.sector_voltage.a, 2, 1, Font_7x10);
+    // ssd1306_SetCursor(6 * Font_7x10.FontWidth, 2 * Font_7x10.FontHeight);
+    // ssd1306_WriteFloat(foc_motor.sector_voltage.b, 2, 1, Font_7x10);
+    // ssd1306_SetCursor(12 * Font_7x10.FontWidth, 2 * Font_7x10.FontHeight);
+    // ssd1306_WriteFloat(foc_motor.sector_voltage.c, 2, 1, Font_7x10);
+
+
+    ssd1306_SetCursor(0, 2 * Font_7x10.FontHeight);
+    sprintf(dat, "ADC: %d %d %d %d ", adc_value[0], adc_value[1], adc_value[2], adc_value[3]);
+    ssd1306_WriteString(dat, Font_7x10);
+
+    ssd1306_UpdateScreen();
 
 
     // wk_delay_ms(1);

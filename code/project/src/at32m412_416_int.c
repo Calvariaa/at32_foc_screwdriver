@@ -29,6 +29,7 @@
 /* private includes ----------------------------------------------------------*/
 /* add user code begin private includes */
 #include "at32m412_416_wk_config.h"
+#include "foc.h"
 
 /* add user code end private includes */
 
@@ -301,6 +302,30 @@ void EXINT3_IRQHandler(void)
 }
 
 /**
+  * @brief  this function handles DMA1 Channel 1 handler.
+  * @param  none
+  * @retval none
+  */
+void DMA1_Channel1_IRQHandler(void)
+{
+  /* add user code begin DMA1_Channel1_IRQ 0 */
+
+  /* add user code end DMA1_Channel1_IRQ 0 */
+
+  if(dma_interrupt_flag_get(DMA1_FDT1_FLAG) != RESET)
+  {   
+    /* add user code begin DMA1_FDT1_FLAG */
+    /* handle full data transfer and clear flag */
+    dma_flag_clear(DMA1_FDT1_FLAG);
+    /* add user code end DMA1_FDT1_FLAG */ 
+  }
+
+  /* add user code begin DMA1_Channel1_IRQ 1 */
+
+  /* add user code end DMA1_Channel1_IRQ 1 */
+}
+
+/**
   * @brief  this function handles TMR1 Overflow and TMR10 handler.
   * @param  none
   * @retval none
@@ -347,6 +372,9 @@ void TMR1_CH_IRQHandler(void)
   if(tmr_interrupt_flag_get(TMR1, TMR_C4_FLAG) != RESET)
   {
     /* add user code begin TMR1_TMR_C4_FLAG */
+
+    foc_control(&foc_motor, 0);
+
     /* clear flag */
     tmr_flag_clear(TMR1, TMR_C4_FLAG);
     /* add user code end TMR1_TMR_C4_FLAG */

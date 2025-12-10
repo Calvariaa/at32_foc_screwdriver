@@ -48,6 +48,7 @@ void wk_tmr1_init(void)
 
   tmr_brk2_config_type tmr_brk2_struct;
 
+  tmr_brkin_config_type tmr_brkin_struct;
 
   gpio_default_para_init(&gpio_init_struct);
 
@@ -173,7 +174,7 @@ void wk_tmr1_init(void)
   tmr_output_channel_immediately_set(TMR1, TMR_SELECT_CHANNEL_3, FALSE);
 
   /* configure channel 4 output settings */
-  tmr_output_struct.oc_mode = TMR_OUTPUT_CONTROL_OFF;
+  tmr_output_struct.oc_mode = TMR_OUTPUT_CONTROL_PWM_MODE_B;
   tmr_output_struct.oc_output_state = TRUE;
   tmr_output_struct.occ_output_state = FALSE;
   tmr_output_struct.oc_polarity = TMR_OUTPUT_ACTIVE_HIGH;
@@ -184,16 +185,27 @@ void wk_tmr1_init(void)
   tmr_channel_value_set(TMR1, TMR_SELECT_CHANNEL_4, 2812);
   tmr_output_channel_buffer_enable(TMR1, TMR_SELECT_CHANNEL_4, FALSE);
 
+  tmr_output_channel_immediately_set(TMR1, TMR_SELECT_CHANNEL_4, FALSE);
+
   /* configure break and dead-time settings */
-  tmr_brkdt_struct.brk_enable = FALSE;
-  tmr_brkdt_struct.auto_output_enable = FALSE;
+  tmr_brkdt_struct.brk_enable = TRUE;
+  tmr_brkdt_struct.auto_output_enable = TRUE;
   tmr_brkdt_struct.brk_polarity = TMR_BRK_INPUT_ACTIVE_LOW;
   tmr_brkdt_struct.fcsoen_state = FALSE;
   tmr_brkdt_struct.fcsodis_state = FALSE;
   tmr_brkdt_struct.wp_level = TMR_WP_OFF;
   tmr_brkdt_struct.deadtime = 54;
   tmr_brkdt_config(TMR1, &tmr_brkdt_struct);
-  tmr_brk_filter_value_set(TMR1, 0);
+  tmr_brk_filter_value_set(TMR1, 15);
+
+  /* break source from brkin config */
+  tmr_brkin_struct.enable = TRUE;
+  tmr_brkin_struct.polarity = TMR_BRKIN_SRC_POL_LOW;
+  tmr_brkin_struct.source = TMR_BRKIN_SOURCE_BRKIN;
+  tmr_brkin_struct.brk_sel = TMR_BRK_SELECT_1;
+  tmr_brk_input_config(TMR1, &tmr_brkin_struct);
+
+  tmr_brk_bidir_enable(TMR1, TMR_BRK_SELECT_1, FALSE);
 
   /* break 2 config */
   tmr_brk2_struct.brk2_enable = FALSE;
