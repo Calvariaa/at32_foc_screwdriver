@@ -27,16 +27,20 @@
 /* Includes ------------------------------------------------------------------*/
 #include "at32m412_416_wk_config.h"
 #include "wk_adc.h"
+#include "wk_exint.h"
 #include "wk_i2c.h"
 #include "wk_tmr.h"
 #include "wk_usart.h"
 #include "wk_dma.h"
 #include "wk_gpio.h"
 #include "wk_system.h"
+#include "arm_math.h"
 
 /* private includes ----------------------------------------------------------*/
 /* add user code begin private includes */
 #include "ssd1306.h"
+#include "at32m412_416_int.h"
+#include "foc.h"
 
 /* add user code end private includes */
 
@@ -118,11 +122,11 @@ int main(void)
   /* init i2c1 function. */
   wk_i2c1_init();
 
+  /* init exint function. */
+  wk_exint_config();
+
   /* init tmr1 function. */
   wk_tmr1_init();
-
-  /* init tmr9 function. */
-  wk_tmr9_init();
 
   /* add user code begin 2 */
   hi2c1.i2cx = SSD1306_I2C_BASE;
@@ -130,14 +134,15 @@ int main(void)
   }
   char dat[32];
 
+  mos_init(TMR1);
   /* add user code end 2 */
 
   while(1)
   {
     /* add user code begin 3 */
     gpio_bits_toggle(GPIOB, GPIO_PINS_8);
-    printf("Hello World\r\n");
 
+    foc_control(&foc_motor, 0);
     ssd1306_Clear();
     ssd1306_SetColor(White);
 
@@ -148,15 +153,14 @@ int main(void)
     // 显示GPIO状态
     ssd1306_SetCursor(0, 0 * Font_7x10.FontHeight);
     sprintf(dat, "PB5:%d PA2:%d PA3:%d",
-            gpio_input_data_bit_read(GPIOB, GPIO_PINS_5),
-            gpio_input_data_bit_read(GPIOA, GPIO_PINS_2),
-            gpio_input_data_bit_read(GPIOA, GPIO_PINS_3));
+            gpio_input_data_bit_read(ENC_PUSH_GPIO_PORT, ENC_PUSH_PIN),
+            gpio_input_data_bit_read(ENC_A_GPIO_PORT, ENC_A_PIN),
+            gpio_input_data_bit_read(ENC_B_GPIO_PORT, ENC_B_PIN));
     ssd1306_WriteString(dat, Font_7x10);
-
     // 显示计数器值
     ssd1306_SetCursor(0, 1 * Font_7x10.FontHeight);
-    int32_t count = (int32_t)tmr_counter_value_get(TMR9);
-    sprintf(dat, "TMR9: %ld", count);
+    int32_t count = encoder_pulse_data;
+    sprintf(dat, "ENC: %ld", count);
     ssd1306_WriteString(dat, Font_7x10);
 
     ssd1306_UpdateScreen();

@@ -61,7 +61,7 @@ void wk_tmr1_init(void)
   gpio_init_struct.gpio_mode = GPIO_MODE_MUX;
   gpio_init_struct.gpio_out_type = GPIO_OUTPUT_PUSH_PULL;
   gpio_init_struct.gpio_pull = GPIO_PULL_NONE;
-  gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_MODERATE;
+  gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_STRONGER;
   gpio_init(GPIOF, &gpio_init_struct);
 
   /* configure the tmr1 CH1C pin */
@@ -70,7 +70,7 @@ void wk_tmr1_init(void)
   gpio_init_struct.gpio_mode = GPIO_MODE_MUX;
   gpio_init_struct.gpio_out_type = GPIO_OUTPUT_PUSH_PULL;
   gpio_init_struct.gpio_pull = GPIO_PULL_NONE;
-  gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_MODERATE;
+  gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_STRONGER;
   gpio_init(GPIOA, &gpio_init_struct);
 
   /* configure the tmr1 CH2 pin */
@@ -79,7 +79,7 @@ void wk_tmr1_init(void)
   gpio_init_struct.gpio_mode = GPIO_MODE_MUX;
   gpio_init_struct.gpio_out_type = GPIO_OUTPUT_PUSH_PULL;
   gpio_init_struct.gpio_pull = GPIO_PULL_NONE;
-  gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_MODERATE;
+  gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_STRONGER;
   gpio_init(GPIOA, &gpio_init_struct);
 
   /* configure the tmr1 CH2C pin */
@@ -88,7 +88,7 @@ void wk_tmr1_init(void)
   gpio_init_struct.gpio_mode = GPIO_MODE_MUX;
   gpio_init_struct.gpio_out_type = GPIO_OUTPUT_PUSH_PULL;
   gpio_init_struct.gpio_pull = GPIO_PULL_NONE;
-  gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_MODERATE;
+  gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_STRONGER;
   gpio_init(GPIOF, &gpio_init_struct);
 
   /* configure the tmr1 CH3 pin */
@@ -97,7 +97,7 @@ void wk_tmr1_init(void)
   gpio_init_struct.gpio_mode = GPIO_MODE_MUX;
   gpio_init_struct.gpio_out_type = GPIO_OUTPUT_PUSH_PULL;
   gpio_init_struct.gpio_pull = GPIO_PULL_NONE;
-  gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_MODERATE;
+  gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_STRONGER;
   gpio_init(GPIOA, &gpio_init_struct);
 
   /* configure the tmr1 CH3C pin */
@@ -106,7 +106,7 @@ void wk_tmr1_init(void)
   gpio_init_struct.gpio_mode = GPIO_MODE_MUX;
   gpio_init_struct.gpio_out_type = GPIO_OUTPUT_PUSH_PULL;
   gpio_init_struct.gpio_pull = GPIO_PULL_NONE;
-  gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_MODERATE;
+  gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_STRONGER;
   gpio_init(GPIOB, &gpio_init_struct);
 
   /* configure the tmr1 BRK pin */
@@ -115,7 +115,7 @@ void wk_tmr1_init(void)
   gpio_init_struct.gpio_mode = GPIO_MODE_MUX;
   gpio_init_struct.gpio_out_type = GPIO_OUTPUT_PUSH_PULL;
   gpio_init_struct.gpio_pull = GPIO_PULL_NONE;
-  gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_MODERATE;
+  gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_STRONGER;
   gpio_init(GPIOA, &gpio_init_struct);
 
   /* configure counter settings */
@@ -123,7 +123,7 @@ void wk_tmr1_init(void)
   tmr_clock_source_div_set(TMR1, TMR_CLOCK_DIV1);
   tmr_repetition_counter_set(TMR1, 0);
   tmr_period_buffer_enable(TMR1, FALSE);
-  tmr_base_init(TMR1, 65535, 0);
+  tmr_base_init(TMR1, 5624, 0);
 
   /* configure primary mode settings */
   tmr_sub_sync_mode_set(TMR1, FALSE);
@@ -175,7 +175,7 @@ void wk_tmr1_init(void)
   tmr_output_struct.oc_idle_state = FALSE;
   tmr_output_struct.occ_idle_state = FALSE;
   tmr_output_channel_config(TMR1, TMR_SELECT_CHANNEL_4, &tmr_output_struct);
-  tmr_channel_value_set(TMR1, TMR_SELECT_CHANNEL_4, 0);
+  tmr_channel_value_set(TMR1, TMR_SELECT_CHANNEL_4, 2812);
   tmr_output_channel_buffer_enable(TMR1, TMR_SELECT_CHANNEL_4, FALSE);
 
   /* configure break and dead-time settings */
@@ -185,7 +185,7 @@ void wk_tmr1_init(void)
   tmr_brkdt_struct.fcsoen_state = FALSE;
   tmr_brkdt_struct.fcsodis_state = FALSE;
   tmr_brkdt_struct.wp_level = TMR_WP_OFF;
-  tmr_brkdt_struct.deadtime = 0;
+  tmr_brkdt_struct.deadtime = 54;
   tmr_brkdt_config(TMR1, &tmr_brkdt_struct);
   tmr_brk_filter_value_set(TMR1, 0);
 
@@ -199,80 +199,12 @@ void wk_tmr1_init(void)
 
   tmr_counter_enable(TMR1, TRUE);
 
+  /* enable c4ien interrupt */
+  tmr_interrupt_enable(TMR1, TMR_C4_INT, TRUE);
+
   /* add user code begin tmr1_init 2 */
 
   /* add user code end tmr1_init 2 */
-}
-
-/**
-  * @brief  init tmr9 function.
-  * @param  none
-  * @retval none
-  */
-void wk_tmr9_init(void)
-{
-  /* add user code begin tmr9_init 0 */
-
-  /* add user code end tmr9_init 0 */
-
-  gpio_init_type gpio_init_struct;
-  tmr_input_config_type  tmr_input_struct;
-
-  gpio_default_para_init(&gpio_init_struct);
-
-  /* add user code begin tmr9_init 1 */
-
-  /* add user code end tmr9_init 1 */
-
-  /* configure the tmr9 CH1 pin */
-  gpio_pin_mux_config(GPIOA, GPIO_PINS_SOURCE2, GPIO_MUX_3);
-  gpio_init_struct.gpio_pins = GPIO_PINS_2;
-  gpio_init_struct.gpio_mode = GPIO_MODE_MUX;
-  gpio_init_struct.gpio_out_type = GPIO_OUTPUT_PUSH_PULL;
-  gpio_init_struct.gpio_pull = GPIO_PULL_NONE;
-  gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_MODERATE;
-  gpio_init(GPIOA, &gpio_init_struct);
-
-  /* configure the tmr9 CH2 pin */
-  gpio_pin_mux_config(GPIOA, GPIO_PINS_SOURCE3, GPIO_MUX_3);
-  gpio_init_struct.gpio_pins = GPIO_PINS_3;
-  gpio_init_struct.gpio_mode = GPIO_MODE_MUX;
-  gpio_init_struct.gpio_out_type = GPIO_OUTPUT_PUSH_PULL;
-  gpio_init_struct.gpio_pull = GPIO_PULL_NONE;
-  gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_MODERATE;
-  gpio_init(GPIOA, &gpio_init_struct);
-
-  /* configure counter settings */
-  tmr_cnt_dir_set(TMR9, TMR_COUNT_UP);
-  tmr_clock_source_div_set(TMR9, TMR_CLOCK_DIV1);
-  tmr_repetition_counter_set(TMR9, 0);
-  tmr_period_buffer_enable(TMR9, FALSE);
-  tmr_base_init(TMR9, 65535, 0);
-
-  /* configure primary mode settings */
-  tmr_sub_sync_mode_set(TMR9, FALSE);
-  tmr_primary_mode_select(TMR9, TMR_PRIMARY_SEL_RESET);
-
-  /* configure encoder mode */
-  tmr_input_struct.input_channel_select = TMR_SELECT_CHANNEL_1;
-  tmr_input_struct.input_mapped_select = TMR_CC_CHANNEL_MAPPED_DIRECT;
-  tmr_input_struct.input_polarity_select = TMR_INPUT_RISING_EDGE;
-  tmr_input_struct.input_filter_value = 0;
-  tmr_input_channel_init(TMR9, &tmr_input_struct, TMR_CHANNEL_INPUT_DIV_1);
-
-  tmr_input_struct.input_channel_select = TMR_SELECT_CHANNEL_2;
-  tmr_input_struct.input_mapped_select = TMR_CC_CHANNEL_MAPPED_DIRECT;
-  tmr_input_struct.input_polarity_select = TMR_INPUT_RISING_EDGE;
-  tmr_input_struct.input_filter_value = 0;
-  tmr_input_channel_init(TMR9, &tmr_input_struct, TMR_CHANNEL_INPUT_DIV_1);
-
-  tmr_encoder_mode_config(TMR9, TMR_ENCODER_MODE_C, TMR_INPUT_RISING_EDGE, TMR_INPUT_RISING_EDGE);
-
-  tmr_counter_enable(TMR9, TRUE);
-
-  /* add user code begin tmr9_init 2 */
-  
-  /* add user code end tmr9_init 2 */
 }
 
 /* add user code begin 1 */

@@ -4,6 +4,10 @@ enable_language(C ASM)
 # AT32 WorkBench generated symbols (macros)
 set(WK_Defines_Syms
     USE_STDPERIPH_DRIVER
+    ARM_MATH_CM4
+    ARM_MATH_MATRIX_CHECK
+    ARM_MATH_ROUNDING
+    ARM_MATH_LOOPUNROLL
     AT32M416EBP7
     $<$<CONFIG:Debug>:DEBUG>
 )
@@ -14,6 +18,8 @@ set(WK_Include_Dirs
     ${CMAKE_SOURCE_DIR}/libraries/drivers/inc
     ${CMAKE_SOURCE_DIR}/libraries/cmsis/cm4/core_support
     ${CMAKE_SOURCE_DIR}/libraries/cmsis/cm4/device_support
+    ${CMAKE_SOURCE_DIR}/libraries/cmsis/dsp/include
+    ${CMAKE_SOURCE_DIR}/libraries/cmsis/dsp/PrivateInclude
 )
 
 # AT32 WorkBench generated application sources
@@ -30,7 +36,23 @@ set(WK_Application_Src
     ${CMAKE_SOURCE_DIR}/project/src/wk_usart.c
     ${CMAKE_SOURCE_DIR}/project/src/wk_gpio.c
     ${CMAKE_SOURCE_DIR}/project/src/wk_dma.c
+    ${CMAKE_SOURCE_DIR}/project/src/wk_exint.c
     ${CMAKE_SOURCE_DIR}/startup_at32m412_416.s
+    ${CMAKE_SOURCE_DIR}/libraries/cmsis/dsp/Source/BasicMathFunctions/BasicMathFunctions.c
+    ${CMAKE_SOURCE_DIR}/libraries/cmsis/dsp/Source/BayesFunctions/BayesFunctions.c
+    ${CMAKE_SOURCE_DIR}/libraries/cmsis/dsp/Source/CommonTables/CommonTables.c
+    ${CMAKE_SOURCE_DIR}/libraries/cmsis/dsp/Source/ComplexMathFunctions/ComplexMathFunctions.c
+    ${CMAKE_SOURCE_DIR}/libraries/cmsis/dsp/Source/ControllerFunctions/ControllerFunctions.c
+    ${CMAKE_SOURCE_DIR}/libraries/cmsis/dsp/Source/DistanceFunctions/DistanceFunctions.c
+    ${CMAKE_SOURCE_DIR}/libraries/cmsis/dsp/Source/FastMathFunctions/FastMathFunctions.c
+    ${CMAKE_SOURCE_DIR}/libraries/cmsis/dsp/Source/FilteringFunctions/FilteringFunctions.c
+    ${CMAKE_SOURCE_DIR}/libraries/cmsis/dsp/Source/InterpolationFunctions/InterpolationFunctions.c
+    ${CMAKE_SOURCE_DIR}/libraries/cmsis/dsp/Source/MatrixFunctions/MatrixFunctions.c
+    ${CMAKE_SOURCE_DIR}/libraries/cmsis/dsp/Source/QuaternionMathFunctions/QuaternionMathFunctions.c
+    ${CMAKE_SOURCE_DIR}/libraries/cmsis/dsp/Source/StatisticsFunctions/StatisticsFunctions.c
+    ${CMAKE_SOURCE_DIR}/libraries/cmsis/dsp/Source/SupportFunctions/SupportFunctions.c
+    ${CMAKE_SOURCE_DIR}/libraries/cmsis/dsp/Source/SVMFunctions/SVMFunctions.c
+    ${CMAKE_SOURCE_DIR}/libraries/cmsis/dsp/Source/TransformFunctions/TransformFunctions.c
 )
 
 # AT32 Drivers
@@ -46,7 +68,9 @@ set(AT32_Drivers_Src
     ${CMAKE_SOURCE_DIR}/libraries/drivers/src/at32m412_416_dma.c
     ${CMAKE_SOURCE_DIR}/libraries/drivers/src/at32m412_416_debug.c
     ${CMAKE_SOURCE_DIR}/libraries/drivers/src/at32m412_416_flash.c
+    ${CMAKE_SOURCE_DIR}/libraries/drivers/src/at32m412_416_exint.c
     ${CMAKE_SOURCE_DIR}/libraries/drivers/src/at32m412_416_misc.c
+    ${CMAKE_SOURCE_DIR}/libraries/drivers/src/at32m412_416_scfg.c
 )
 
 # Drivers Middlewares

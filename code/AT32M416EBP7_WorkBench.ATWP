@@ -42,6 +42,16 @@
             <ModeSub name="SWO" value="FALSE"/>
         </Mode>
     </DEBUG>
+    <EXINT>
+        <Mode>
+            <ModeSub name="EXINT2" value="TRUE"/>
+            <ModeSub name="EXINT3" value="TRUE"/>
+        </Mode>
+        <Parameters>
+            <ParametersSub name="TriggerPolarity_2" value="EXINT_TRIGGER_BOTH_EDGE"/>
+            <ParametersSub name="TriggerPolarity_3" value="EXINT_TRIGGER_BOTH_EDGE"/>
+        </Parameters>
+    </EXINT>
     <I2C1>
         <Mode>
             <ModeSub name="I2C" value="I2C"/>
@@ -65,16 +75,16 @@
             <ModeSub name="Activated" value="TRUE"/>
             <ModeSub name="Enable BRK pin" value="TRUE"/>
         </Mode>
-    </TMR1>
-    <TMR9>
-        <Mode>
-            <ModeSub name="Multi-Channels" value="Encoder_Mode"/>
-            <ModeSub name="Activated" value="TRUE"/>
-        </Mode>
         <Parameters>
-            <ParametersSub name="EncoderMode" value="TMR_ENCODER_MODE_C"/>
+            <ParametersSub name="Period" value="5624"/>
+            <ParametersSub name="DeadTime" value="54"/>
+            <ParametersSub name="DeadTimeValue" value="300"/>
+            <ParametersSub name="ChannelData_4" value="2812"/>
         </Parameters>
-    </TMR9>
+        <Interrupts>
+            <InterruptsSub name="Interrupt_C4IF" value="TRUE"/>
+        </Interrupts>
+    </TMR1>
     <USART2>
         <Mode>
             <ModeSub name="Mode" value="Asynchronous"/>
@@ -83,6 +93,11 @@
             <ParametersSub name="RealBaudRate" value="115163"/>
         </Parameters>
     </USART2>
+    <CMSIS_DSP>
+        <Mode>
+            <ModeSub name="CMSIS_DSP_State" value="TRUE"/>
+        </Mode>
+    </CMSIS_DSP>
     <DMA>
         <ADC2>
             <ParametersSub name="Instance" value="DMA1_Channel1"/>
@@ -94,18 +109,52 @@
         <SysTick_Handler>1;15;0;0;0</SysTick_Handler>
         <FLASH_IRQHandler>0;0;0;0;0</FLASH_IRQHandler>
         <CRM_IRQHandler>0;0;0;0;0</CRM_IRQHandler>
+        <EXINT2_IRQHandler>1;0;0;0;0</EXINT2_IRQHandler>
+        <EXINT3_IRQHandler>1;0;0;0;0</EXINT3_IRQHandler>
         <DMA1_Channel1_IRQHandler>0;0;0;0;0</DMA1_Channel1_IRQHandler>
         <ADC1_2_IRQHandler>0;0;0;0;0</ADC1_2_IRQHandler>
         <TMR1_BRK_TMR9_IRQHandler>0;0;0;0;0</TMR1_BRK_TMR9_IRQHandler>
         <TMR1_OVF_TMR10_IRQHandler>1;0;0;0;0</TMR1_OVF_TMR10_IRQHandler>
         <TMR1_TRG_HALL_TMR11_IRQHandler>1;0;0;0;0</TMR1_TRG_HALL_TMR11_IRQHandler>
-        <TMR1_CH_IRQHandler>0;0;0;0;0</TMR1_CH_IRQHandler>
+        <TMR1_CH_IRQHandler>1;0;0;0;0</TMR1_CH_IRQHandler>
         <I2C1_EVT_IRQHandler>0;0;0;0;0</I2C1_EVT_IRQHandler>
         <I2C1_ERR_IRQHandler>0;0;0;0;0</I2C1_ERR_IRQHandler>
         <USART2_IRQHandler>0;0;0;0;0</USART2_IRQHandler>
         <FPU_IRQHandler>0;0;0;0;0</FPU_IRQHandler>
         <DMAMUX_IRQHandler>0;0;0;0;0</DMAMUX_IRQHandler>
     </NVIC>
+    <GPIO>
+        <Signal SignalName="TMR1_CH1" PinName="PF0">
+            <Parameters name="GPIO_DriverCapability" value="GPIO_DRIVE_STRENGTH_STRONGER"/>
+        </Signal>
+        <Signal SignalName="TMR1_CH2C" PinName="PF1">
+            <Parameters name="GPIO_DriverCapability" value="GPIO_DRIVE_STRENGTH_STRONGER"/>
+        </Signal>
+        <Signal SignalName="EXINT2" PinName="PA2">
+            <Parameters name="Label" value="ENC_A"/>
+        </Signal>
+        <Signal SignalName="EXINT3" PinName="PA3">
+            <Parameters name="Label" value="ENC_B"/>
+        </Signal>
+        <Signal SignalName="TMR1_BRK" PinName="PA6">
+            <Parameters name="GPIO_DriverCapability" value="GPIO_DRIVE_STRENGTH_STRONGER"/>
+        </Signal>
+        <Signal SignalName="TMR1_CH1C" PinName="PA7">
+            <Parameters name="GPIO_DriverCapability" value="GPIO_DRIVE_STRENGTH_STRONGER"/>
+        </Signal>
+        <Signal SignalName="TMR1_CH3C" PinName="PB15">
+            <Parameters name="GPIO_DriverCapability" value="GPIO_DRIVE_STRENGTH_STRONGER"/>
+        </Signal>
+        <Signal SignalName="TMR1_CH2" PinName="PA9 [PA11]">
+            <Parameters name="GPIO_DriverCapability" value="GPIO_DRIVE_STRENGTH_STRONGER"/>
+        </Signal>
+        <Signal SignalName="TMR1_CH3" PinName="PA10 [PA12]">
+            <Parameters name="GPIO_DriverCapability" value="GPIO_DRIVE_STRENGTH_STRONGER"/>
+        </Signal>
+        <Signal SignalName="GPIO_Input" PinName="PB5">
+            <Parameters name="Label" value="ENC_PUSH"/>
+        </Signal>
+    </GPIO>
     <ClockConfiguration>
         <rtcsel>0</rtcsel>
         <rtcdiv>2</rtcdiv>
@@ -133,8 +182,8 @@
         <PinSub pinname="PF1" signalname="TMR1_CH2C" signaltype="2"/>
         <PinSub pinname="PA0" signalname="ADC2_IN0" signaltype="2"/>
         <PinSub pinname="PA1" signalname="ADC2_IN1" signaltype="2"/>
-        <PinSub pinname="PA2" signalname="TMR9_CH1" signaltype="2"/>
-        <PinSub pinname="PA3" signalname="TMR9_CH2" signaltype="2"/>
+        <PinSub pinname="PA2" signalname="EXINT2" signaltype="3"/>
+        <PinSub pinname="PA3" signalname="EXINT3" signaltype="3"/>
         <PinSub pinname="PA4" signalname="ADC2_IN4" signaltype="2"/>
         <PinSub pinname="PA5" signalname="ADC2_IN5" signaltype="2"/>
         <PinSub pinname="PA6" signalname="TMR1_BRK" signaltype="2"/>
@@ -153,7 +202,7 @@
     </PINInfo>
     <ProjectInfomation>
         <ProjectName>AT32M416EBP7_WorkBench</ProjectName>
-        <ProjectLocation>C:/Users/Calvaria/Documents/Code/at32_foc_screwdriver/code</ProjectLocation>
+        <ProjectLocation>C:/Users/Calvaria/Documents/Code/AT32/at32_foc_screwdriver/code</ProjectLocation>
         <ToolchainIDE>CMake</ToolchainIDE>
         <ARMCompiler>0</ARMCompiler>
         <KeepUserCode>true</KeepUserCode>

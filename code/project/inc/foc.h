@@ -1,0 +1,54 @@
+//
+// Created by Calvaria on 2025/9/20.
+//
+
+#ifndef SIMPLEFOC_STM32F431_FOC_H
+#define SIMPLEFOC_STM32F431_FOC_H
+
+#include <stdint.h>
+
+#include "at32m412_416_tmr.h"
+
+#define ANGLE_TO_RAD(x)     ( (x) * (float)M_PI / 180 )                           // 角度转换为弧度
+#define RAD_TO_ANGLE(x)     ( (x) * 180 / (float)M_PI )                           // 弧度转换为角度
+
+typedef struct {
+        float a;
+        float b;
+        float c;
+}motor_t;
+
+typedef struct {
+        float i_d;
+        float i_q;
+}turn_vector_t;
+
+typedef struct {
+        float alpha;
+        float beta;
+}static_vector_t;
+
+typedef struct {
+        tmr_type *htim;
+
+        motor_t current;
+        turn_vector_t turn_vector;
+        static_vector_t i_park_vector;
+        uint8_t sector;
+        motor_t sector_voltage;
+        static_vector_t svpwm_vector;
+        motor_t svpwm_voltage;
+
+        float set_angle;
+        uint32_t expect_rotations;
+}foc_t;
+
+extern foc_t foc_motor;
+
+void foc_init(foc_t *_foc, tmr_type *_htim);
+
+void foc_control(foc_t *_foc, int32_t now_encoder_data);
+
+void mos_init(tmr_type *_htim);
+
+#endif //SIMPLEFOC_STM32F431_FOC_H

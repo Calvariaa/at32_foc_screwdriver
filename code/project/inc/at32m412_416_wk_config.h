@@ -87,6 +87,14 @@ extern "C" {
 //#define DMA1_CHANNEL7_PERIPHERAL_BASE_ADDR   0
 /* add user code end dma define */
 
+/* Private defines -------------------------------------------------------------*/
+#define ENC_A_PIN    GPIO_PINS_2
+#define ENC_A_GPIO_PORT    GPIOA
+#define ENC_B_PIN    GPIO_PINS_3
+#define ENC_B_GPIO_PORT    GPIOA
+#define ENC_PUSH_PIN    GPIO_PINS_5
+#define ENC_PUSH_GPIO_PORT    GPIOB
+
 /* exported functions ------------------------------------------------------- */
   /* system clock config. */
   void wk_system_clock_config(void);

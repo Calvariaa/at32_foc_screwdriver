@@ -51,9 +51,9 @@ void wk_gpio_config(void)
 
   /* gpio input config */
   gpio_init_struct.gpio_mode = GPIO_MODE_INPUT;
-  gpio_init_struct.gpio_pins = GPIO_PINS_5;
+  gpio_init_struct.gpio_pins = ENC_PUSH_PIN;
   gpio_init_struct.gpio_pull = GPIO_PULL_NONE;
-  gpio_init(GPIOB, &gpio_init_struct);
+  gpio_init(ENC_PUSH_GPIO_PORT, &gpio_init_struct);
 
   /* gpio output config */
   gpio_bits_reset(GPIOB, GPIO_PINS_8);

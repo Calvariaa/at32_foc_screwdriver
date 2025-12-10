@@ -28,6 +28,7 @@
 #include "at32m412_416_int.h"
 /* private includes ----------------------------------------------------------*/
 /* add user code begin private includes */
+#include "at32m412_416_wk_config.h"
 
 /* add user code end private includes */
 
@@ -63,7 +64,7 @@
 
 /* external variables ---------------------------------------------------------*/
 /* add user code begin external variables */
-
+int32_t encoder_pulse_data = 0;
 /* add user code end external variables */
 
 /**
@@ -220,6 +221,86 @@ void SysTick_Handler(void)
 }
 
 /**
+  * @brief  this function handles EXINT Line 2 handler.
+  * @param  none
+  * @retval none
+  */
+void EXINT2_IRQHandler(void)
+{
+  /* add user code begin EXINT2_IRQ 0 */
+
+  /* add user code end EXINT2_IRQ 0 */
+
+  if(exint_interrupt_flag_get(EXINT_LINE_2) != RESET)
+  {
+    /* add user code begin EXINT_LINE_2 */
+    if (gpio_input_data_bit_read(ENC_A_GPIO_PORT, ENC_A_PIN) == SET) {
+      if (gpio_input_data_bit_read(ENC_B_GPIO_PORT, ENC_B_PIN) == RESET) {
+        encoder_pulse_data++;
+      }
+      else {
+        encoder_pulse_data--;
+      }
+    }
+    else {
+      if (gpio_input_data_bit_read(ENC_B_GPIO_PORT, ENC_B_PIN) == SET) {
+        encoder_pulse_data++;
+      }
+      else {
+        encoder_pulse_data--;
+      }
+    }
+    /* clear flag */
+    exint_flag_clear(EXINT_LINE_2);
+    /* add user code end EXINT_LINE_2 */ 
+  }
+
+  /* add user code begin EXINT2_IRQ 1 */
+
+  /* add user code end EXINT2_IRQ 1 */
+}
+
+/**
+  * @brief  this function handles EXINT Line 3 handler.
+  * @param  none
+  * @retval none
+  */
+void EXINT3_IRQHandler(void)
+{
+  /* add user code begin EXINT3_IRQ 0 */
+
+  /* add user code end EXINT3_IRQ 0 */
+
+  if(exint_interrupt_flag_get(EXINT_LINE_3) != RESET)
+  {
+    /* add user code begin EXINT_LINE_3 */
+    if (gpio_input_data_bit_read(ENC_B_GPIO_PORT, ENC_B_PIN) == SET) {
+      if (gpio_input_data_bit_read(ENC_A_GPIO_PORT, ENC_A_PIN) == SET) {
+        encoder_pulse_data++;
+      }
+      else {
+        encoder_pulse_data--;
+      }
+    }
+    else {
+      if (gpio_input_data_bit_read(ENC_A_GPIO_PORT, ENC_A_PIN) == RESET) {
+        encoder_pulse_data++;
+      }
+      else {
+        encoder_pulse_data--;
+      }
+    }
+    /* clear flag */
+    exint_flag_clear(EXINT_LINE_3);
+    /* add user code end EXINT_LINE_3 */ 
+  }
+
+  /* add user code begin EXINT3_IRQ 1 */
+
+  /* add user code end EXINT3_IRQ 1 */
+}
+
+/**
   * @brief  this function handles TMR1 Overflow and TMR10 handler.
   * @param  none
   * @retval none
@@ -249,6 +330,31 @@ void TMR1_TRG_HALL_TMR11_IRQHandler(void)
   /* add user code begin TMR1_TRG_HALL_TMR11_IRQ 1 */
 
   /* add user code end TMR1_TRG_HALL_TMR11_IRQ 1 */
+}
+
+/**
+  * @brief  this function handles TMR1 Channel handler.
+  * @param  none
+  * @retval none
+  */
+void TMR1_CH_IRQHandler(void)
+{
+  /* add user code begin TMR1_CH_IRQ 0 */
+
+  /* add user code end TMR1_CH_IRQ 0 */
+
+  /* channel4 interrupt management */
+  if(tmr_interrupt_flag_get(TMR1, TMR_C4_FLAG) != RESET)
+  {
+    /* add user code begin TMR1_TMR_C4_FLAG */
+    /* clear flag */
+    tmr_flag_clear(TMR1, TMR_C4_FLAG);
+    /* add user code end TMR1_TMR_C4_FLAG */
+  }
+
+  /* add user code begin TMR1_CH_IRQ 1 */
+
+  /* add user code end TMR1_CH_IRQ 1 */
 }
 
 /* add user code begin 1 */
