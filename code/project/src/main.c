@@ -117,6 +117,16 @@ int main(void)
                         DMA1_CHANNEL1_BUFFER_SIZE);
   dma_channel_enable(DMA1_CHANNEL1, TRUE);
 
+  /* init dma1 channel2 */
+  wk_dma1_channel2_init();
+  /* config dma channel transfer parameter */
+  /* user need to modify define values DMAx_CHANNELy_XXX_BASE_ADDR and DMAx_CHANNELy_BUFFER_SIZE in at32xxx_wk_config.h */
+  wk_dma_channel_config(DMA1_CHANNEL2, 
+                        (uint32_t)&I2C1->txdt, 
+                        DMA1_CHANNEL2_MEMORY_BASE_ADDR, 
+                        DMA1_CHANNEL2_BUFFER_SIZE);
+  dma_channel_enable(DMA1_CHANNEL2, TRUE);
+
   /* init usart2 function. */
   wk_usart2_init();
 
@@ -153,8 +163,7 @@ int main(void)
 
     // 显示GPIO状态
     ssd1306_SetCursor(0, 0 * Font_7x10.FontHeight);
-    int32_t count = encoder_pulse_data;
-    sprintf(dat, "ENC: %ld", count);
+    sprintf(dat, "ENC: %ld ", encoder_position);
     ssd1306_WriteString(dat, Font_7x10);
     ssd1306_WriteFloat(foc_motor.set_angle, 1, 3, Font_7x10);
     ssd1306_WriteFloat(foc_motor.sector, 4, 1, Font_7x10);
@@ -165,8 +174,7 @@ int main(void)
     ssd1306_SetCursor(0, 2 * Font_7x10.FontHeight);
     ssd1306_WriteFloat(hall_theta, 1, 2, Font_7x10);
 
-
-    printf("%d,%d,%d\n", adc_value[2], adc_value[3], (int16_t)(hall_theta*10000));
+    // printf("%d,%d,%d\n", adc_value[2], adc_value[3], (int16_t)(hall_theta*10000));
 
     ssd1306_UpdateScreen();
 

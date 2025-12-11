@@ -7,9 +7,6 @@
 #include <math.h>
 #include "arm_math.h"
 
-#define BUS_VOLTAGE 12
-#define COUNT_PERIOD 5624
-
 void mos_all_set(tmr_type *_htim, const uint32_t _cmp_u, const uint32_t _cmp_v, const uint32_t _cmp_w) {
   tmr_channel_value_set(_htim, TMR_SELECT_CHANNEL_3, _cmp_u);
   tmr_channel_value_set(_htim, TMR_SELECT_CHANNEL_2, _cmp_v);
@@ -150,7 +147,7 @@ void foc_init(foc_t *_foc, const uint8_t pole_pairs, tmr_type *_htim) {
   _foc->expect_rotations = 0;
 }
 
-void foc_control(foc_t *_foc, float hall_data) {
+void foc_control(foc_t *_foc, float iq, float hall_data) {
   // _foc->set_angle += ANGLE_TO_RAD(0.4);
   // _foc->set_angle += (float)ANGLE_TO_RAD(0.01);
   // if (_foc->set_angle >= M_PI * 2) {
@@ -163,7 +160,7 @@ void foc_control(foc_t *_foc, float hall_data) {
   // }
 
   _foc->turn_vector.i_d = 0;
-  _foc->turn_vector.i_q = -1.0f;
+  _foc->turn_vector.i_q = iq;
 
   _foc->i_park_vector = i_park(_foc->turn_vector, hall_data * (float)_foc->pole_pairs);
   _foc->sector_voltage = i_clark(_foc->i_park_vector);

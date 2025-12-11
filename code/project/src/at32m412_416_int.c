@@ -67,6 +67,7 @@
 /* external variables ---------------------------------------------------------*/
 /* add user code begin external variables */
 int32_t encoder_pulse_data = 0;
+int32_t encoder_position = 0;
 /* add user code end external variables */
 
 /**
@@ -318,7 +319,9 @@ void DMA1_Channel1_IRQHandler(void)
     /* add user code begin DMA1_FDT1_FLAG */
     hall_update();
 
-    foc_control(&foc_motor, hall_theta);
+    encoder_position = (encoder_pulse_data) / 4;
+
+    foc_control(&foc_motor, (float)encoder_position / 10.f, hall_theta);
 
     gpio_bits_toggle(LED0_GPIO_PORT,LED0_PIN);
     
@@ -330,6 +333,30 @@ void DMA1_Channel1_IRQHandler(void)
   /* add user code begin DMA1_Channel1_IRQ 1 */
 
   /* add user code end DMA1_Channel1_IRQ 1 */
+}
+
+/**
+  * @brief  this function handles DMA1 Channel 2 handler.
+  * @param  none
+  * @retval none
+  */
+void DMA1_Channel2_IRQHandler(void)
+{
+  /* add user code begin DMA1_Channel2_IRQ 0 */
+
+  /* add user code end DMA1_Channel2_IRQ 0 */
+
+  if(dma_interrupt_flag_get(DMA1_FDT2_FLAG) != RESET)
+  {   
+    /* add user code begin DMA1_FDT2_FLAG */
+    /* handle full data transfer and clear flag */
+    dma_flag_clear(DMA1_FDT2_FLAG);
+    /* add user code end DMA1_FDT2_FLAG */ 
+  }
+
+  /* add user code begin DMA1_Channel2_IRQ 1 */
+
+  /* add user code end DMA1_Channel2_IRQ 1 */
 }
 
 /**

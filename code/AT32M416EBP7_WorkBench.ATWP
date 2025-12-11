@@ -120,6 +120,12 @@
             <ParametersSub name="RequestCount" value="1"/>
             <ParametersSub name="Interrupt_FDT" value="ENABLE"/>
         </ADC2>
+        <I2C1_TX>
+            <ParametersSub name="Instance" value="DMA1_Channel2"/>
+            <ParametersSub name="SyncRequestCount" value="1"/>
+            <ParametersSub name="RequestCount" value="1"/>
+            <ParametersSub name="Interrupt_FDT" value="ENABLE"/>
+        </I2C1_TX>
     </DMA>
     <NVIC>
         <SysTick_Handler>1;15;0;0;0</SysTick_Handler>
@@ -128,6 +134,7 @@
         <EXINT2_IRQHandler>1;0;0;0;0</EXINT2_IRQHandler>
         <EXINT3_IRQHandler>1;0;0;0;0</EXINT3_IRQHandler>
         <DMA1_Channel1_IRQHandler>1;0;0;0;0</DMA1_Channel1_IRQHandler>
+        <DMA1_Channel2_IRQHandler>1;0;0;0;0</DMA1_Channel2_IRQHandler>
         <ADC1_2_IRQHandler>0;0;0;0;0</ADC1_2_IRQHandler>
         <TMR1_BRK_TMR9_IRQHandler>0;0;0;0;0</TMR1_BRK_TMR9_IRQHandler>
         <TMR1_OVF_TMR10_IRQHandler>1;0;0;0;0</TMR1_OVF_TMR10_IRQHandler>

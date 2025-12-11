@@ -68,6 +68,42 @@ void wk_dma1_channel1_init(void)
 }
 
 /**
+  * @brief  init dma1 channel2 for "i2c1_tx"
+  * @param  none
+  * @retval none
+  */
+void wk_dma1_channel2_init(void)
+{
+  /* add user code begin dma1_channel2 0 */
+
+  /* add user code end dma1_channel2 0 */
+
+  dma_init_type dma_init_struct;
+
+  dma_reset(DMA1_CHANNEL2);
+  dma_default_para_init(&dma_init_struct);
+  dma_init_struct.direction = DMA_DIR_MEMORY_TO_PERIPHERAL;
+  dma_init_struct.memory_data_width = DMA_MEMORY_DATA_WIDTH_BYTE;
+  dma_init_struct.memory_inc_enable = TRUE;
+  dma_init_struct.peripheral_data_width = DMA_PERIPHERAL_DATA_WIDTH_BYTE;
+  dma_init_struct.peripheral_inc_enable = FALSE;
+  dma_init_struct.priority = DMA_PRIORITY_LOW;
+  dma_init_struct.loop_mode_enable = FALSE;
+  dma_init(DMA1_CHANNEL2, &dma_init_struct);
+
+  /* dmamux function enable */
+  dmamux_enable(DMA1, TRUE);
+  dmamux_init(DMA1MUX_CHANNEL2, DMAMUX_DMAREQ_ID_I2C1_TX);
+
+  /* enable dma1 channel2 full data transfer interrupt */
+  dma_interrupt_enable(DMA1_CHANNEL2, DMA_FDT_INT, TRUE);
+
+  /* add user code begin dma1_channel2 1 */
+
+  /* add user code end dma1_channel2 1 */
+}
+
+/**
   * @brief  config dma channel transfer parameter
   * @param  dmax_channely: DMAx_CHANNELy
   * @param  peripheral_base_addr: peripheral address.

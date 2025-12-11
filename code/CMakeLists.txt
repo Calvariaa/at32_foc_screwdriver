@@ -38,6 +38,7 @@ add_executable(${CMAKE_PROJECT_NAME}
         project/src/fonts.c
         project/src/foc.c
         project/src/hall.c
+        project/src/pid.c
 )
 
 # Add at32_workbench generated sources

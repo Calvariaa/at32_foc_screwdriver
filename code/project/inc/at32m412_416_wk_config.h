@@ -53,6 +53,12 @@ extern "C" {
 
 /* exported macro ------------------------------------------------------------*/
 /* add user code begin exported macro */
+#define MIN(a, b) (((a) < (b)) ? (a) : (b))
+#define MAX(a, b) (((a) > (b)) ? (a) : (b))
+#define MINMAX(input, low, upper) MIN(MAX(input, low), upper)
+
+#define ANGLE_TO_RAD(x)     ( (x) * M_PI / 180 )                           // 角度转换为弧度
+#define RAD_TO_ANGLE(x)     ( (x) * 180 / M_PI )                           // 弧度转换为角度
 
 /* add user code end exported macro */
 
@@ -62,8 +68,8 @@ extern "C" {
 #define DMA1_CHANNEL1_MEMORY_BASE_ADDR   (uint32_t)adc_value
 //#define DMA1_CHANNEL1_PERIPHERAL_BASE_ADDR  0
 
-//#define DMA1_CHANNEL2_BUFFER_SIZE   0
-//#define DMA1_CHANNEL2_MEMORY_BASE_ADDR   0
+#define DMA1_CHANNEL2_BUFFER_SIZE   SSD1306_BUFFER_SIZE
+#define DMA1_CHANNEL2_MEMORY_BASE_ADDR   (uint32_t)SSD1306_Buffer
 //#define DMA1_CHANNEL2_PERIPHERAL_BASE_ADDR   0
 
 //#define DMA1_CHANNEL3_BUFFER_SIZE   0
