@@ -40,16 +40,16 @@ typedef struct {
         motor_t svpwm_voltage;
 
         float set_angle;
+        uint8_t pole_pairs;
+
         uint32_t expect_rotations;
 }foc_t;
 
 extern foc_t foc_motor;
 
-void foc_init(foc_t *_foc, tmr_type *_htim);
+void foc_init(foc_t *_foc, uint8_t pole_pairs, tmr_type *_htim);
 
-void foc_control(foc_t *_foc, int32_t now_encoder_data);
-
-void mos_init(tmr_type *_htim);
+void foc_control(foc_t *_foc, float hall_data);
 
 void mos_all_set(tmr_type *_htim, uint32_t _cmp_u, uint32_t _cmp_v, uint32_t _cmp_w);
 

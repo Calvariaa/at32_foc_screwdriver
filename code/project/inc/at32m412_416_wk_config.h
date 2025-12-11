@@ -102,6 +102,8 @@ extern "C" {
 #define HALL_B_GPIO_PORT    GPIOA
 #define ENC_PUSH_PIN    GPIO_PINS_5
 #define ENC_PUSH_GPIO_PORT    GPIOB
+#define LED0_PIN    GPIO_PINS_8
+#define LED0_GPIO_PORT    GPIOB
 
 /* exported functions ------------------------------------------------------- */
   /* system clock config. */

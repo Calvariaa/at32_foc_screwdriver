@@ -30,6 +30,7 @@
 /* add user code begin private includes */
 #include "at32m412_416_wk_config.h"
 #include "foc.h"
+#include "hall.h"
 
 /* add user code end private includes */
 
@@ -315,6 +316,12 @@ void DMA1_Channel1_IRQHandler(void)
   if(dma_interrupt_flag_get(DMA1_FDT1_FLAG) != RESET)
   {   
     /* add user code begin DMA1_FDT1_FLAG */
+    hall_update();
+
+    foc_control(&foc_motor, hall_theta);
+
+    gpio_bits_toggle(LED0_GPIO_PORT,LED0_PIN);
+    
     /* handle full data transfer and clear flag */
     dma_flag_clear(DMA1_FDT1_FLAG);
     /* add user code end DMA1_FDT1_FLAG */ 
@@ -373,7 +380,7 @@ void TMR1_CH_IRQHandler(void)
   {
     /* add user code begin TMR1_TMR_C4_FLAG */
 
-    foc_control(&foc_motor, 0);
+    adc_ordinary_software_trigger_enable(ADC2, TRUE);
 
     /* clear flag */
     tmr_flag_clear(TMR1, TMR_C4_FLAG);

@@ -25,8 +25,9 @@
         </Mode>
         <Parameters>
             <ParametersSub name="EnableOrdinaryConversion" value="ENABLE"/>
-            <ParametersSub name="OrdinaryTriggerSource" value="ADC_ORDINARY_TRIG_TMR1CH4"/>
-            <ParametersSub name="OrdinaryExternalTriggerEdge" value="ADC_ORDINARY_TRIG_EDGE_RISING"/>
+            <ParametersSub name="OrdinaryTriggerSource" value="ADC_ORDINARY_TRIG_SOFTWARE"/>
+            <ParametersSub name="DMATransferNonCombinedMode" value="TRUE"/>
+            <ParametersSub name="DMARequestContinuationNonCombinedMode" value="TRUE"/>
             <ParametersSub name="NbrOfOrdinarySequence" value="4"/>
             <ParametersSub name="Channel_OrdinarySequence_1" value="ADC_CHANNEL_0"/>
             <ParametersSub name="SamplingRate_OrdinarySequence_1" value="2.143"/>
@@ -93,6 +94,7 @@
             <ParametersSub name="OCMode_3" value="TMR_OUTPUT_CONTROL_PWM_MODE_A"/>
             <ParametersSub name="OCMode_4" value="TMR_OUTPUT_CONTROL_PWM_MODE_B"/>
             <ParametersSub name="ChannelData_4" value="2812"/>
+            <ParametersSub name="OC4ImmediatelyMode_PWM" value="TRUE"/>
         </Parameters>
         <Interrupts>
             <InterruptsSub name="Interrupt_C4IF" value="TRUE"/>
@@ -180,6 +182,9 @@
         <Signal SignalName="GPIO_Input" PinName="PB5">
             <Parameters name="Label" value="ENC_PUSH"/>
         </Signal>
+        <Signal SignalName="GPIO_Output" PinName="BOOT0/PB8">
+            <Parameters name="Label" value="LED0"/>
+        </Signal>
     </GPIO>
     <ClockConfiguration>
         <rtcsel>0</rtcsel>
@@ -228,7 +233,7 @@
     </PINInfo>
     <ProjectInfomation>
         <ProjectName>AT32M416EBP7_WorkBench</ProjectName>
-        <ProjectLocation>C:/Users/Calvaria/Documents/Code/at32_foc_screwdriver/code</ProjectLocation>
+        <ProjectLocation>C:/Users/Calvaria/Documents/Code/AT32/at32_foc_screwdriver/code</ProjectLocation>
         <ToolchainIDE>CMake</ToolchainIDE>
         <ARMCompiler>0</ARMCompiler>
         <KeepUserCode>true</KeepUserCode>

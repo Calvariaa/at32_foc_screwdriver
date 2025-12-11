@@ -185,7 +185,7 @@ void wk_tmr1_init(void)
   tmr_channel_value_set(TMR1, TMR_SELECT_CHANNEL_4, 2812);
   tmr_output_channel_buffer_enable(TMR1, TMR_SELECT_CHANNEL_4, FALSE);
 
-  tmr_output_channel_immediately_set(TMR1, TMR_SELECT_CHANNEL_4, FALSE);
+  tmr_output_channel_immediately_set(TMR1, TMR_SELECT_CHANNEL_4, TRUE);
 
   /* configure break and dead-time settings */
   tmr_brkdt_struct.brk_enable = TRUE;

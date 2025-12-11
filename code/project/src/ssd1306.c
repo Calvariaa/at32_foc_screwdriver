@@ -73,7 +73,7 @@ uint8_t ssd1306_Init(void) {
   // }
 
   // Wait for the screen to boot
-  // wk_delay_ms(100);
+  wk_delay_ms(100);
 
   /* Init LCD */
   ssd1306_WriteCommand(DISPLAYOFF);

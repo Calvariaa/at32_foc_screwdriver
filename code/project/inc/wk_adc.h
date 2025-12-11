@@ -37,7 +37,7 @@ extern "C" {
 
 /* private includes -------------------------------------------------------------*/
 /* add user code begin private includes */
-extern uint16_t adc_value[DMA1_CHANNEL1_BUFFER_SIZE];
+extern uint16_t adc_value[4];
 
 /* add user code end private includes */
 

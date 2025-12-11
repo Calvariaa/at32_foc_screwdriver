@@ -27,9 +27,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "wk_dma.h"
 
-
 /* add user code begin 0 */
-#include "wk_adc.h"
 
 /* add user code end 0 */
 

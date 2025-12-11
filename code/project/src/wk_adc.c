@@ -28,7 +28,7 @@
 #include "wk_adc.h"
 
 /* add user code begin 0 */
-uint16_t adc_value[DMA1_CHANNEL1_BUFFER_SIZE] = {0};
+uint16_t adc_value[4] = {0};
 
 /* add user code end 0 */
 
@@ -125,7 +125,10 @@ void wk_adc2_init(void)
 
   /* When "ADC_ORDINARY_TRIG_EDGE_NONE" is selected, the external trigger source is invalid, and user can only use software trigger. \
   The software trigger function is adc_ordinary_software_trigger_enable(ADCx, TRUE); */
-  adc_ordinary_conversion_trigger_set(ADC2, ADC_ORDINARY_TRIG_TMR1CH4, ADC_ORDINARY_TRIG_EDGE_RISING);
+  adc_ordinary_conversion_trigger_set(ADC2,  ADC_ORDINARY_TRIG_TMR1CH1, ADC_ORDINARY_TRIG_EDGE_NONE);
+
+  adc_dma_mode_enable(ADC2, TRUE);
+  adc_dma_request_repeat_enable(ADC2, TRUE);
 
   /* add user code begin adc2_init 2 */
 

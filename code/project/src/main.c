@@ -41,6 +41,7 @@
 #include "ssd1306.h"
 #include "at32m412_416_int.h"
 #include "foc.h"
+#include "hall.h"
 
 /* add user code end private includes */
 
@@ -111,7 +112,7 @@ int main(void)
   /* config dma channel transfer parameter */
   /* user need to modify define values DMAx_CHANNELy_XXX_BASE_ADDR and DMAx_CHANNELy_BUFFER_SIZE in at32xxx_wk_config.h */
   wk_dma_channel_config(DMA1_CHANNEL1, 
-                        (uint32_t)&ADCCOM->codt, 
+                        (uint32_t)&ADC2->odt, 
                         DMA1_CHANNEL1_MEMORY_BASE_ADDR, 
                         DMA1_CHANNEL1_BUFFER_SIZE);
   dma_channel_enable(DMA1_CHANNEL1, TRUE);
@@ -134,18 +135,14 @@ int main(void)
   }
   char dat[32];
 
-  foc_init(&foc_motor, TMR1);
-  mos_init(TMR1);
+  foc_init(&foc_motor, 2, TMR1);
+
+  hall_init();
   /* add user code end 2 */
 
   while(1)
   {
     /* add user code begin 3 */
-    // adc_ordinary_software_trigger_enable(ADC2, TRUE);
-    //
-    // while (dma_flag_get(DMA1_FDT1_FLAG) == RESET) {
-    // }
-    // dma_flag_clear(DMA1_FDT1_FLAG);
 
     ssd1306_Clear();
     ssd1306_SetColor(White);
@@ -159,20 +156,17 @@ int main(void)
     int32_t count = encoder_pulse_data;
     sprintf(dat, "ENC: %ld", count);
     ssd1306_WriteString(dat, Font_7x10);
-
-    ssd1306_SetCursor(0, 1 * Font_7x10.FontHeight);
     ssd1306_WriteFloat(foc_motor.set_angle, 1, 3, Font_7x10);
     ssd1306_WriteFloat(foc_motor.sector, 4, 1, Font_7x10);
-    // ssd1306_WriteFloat(foc_motor.sector_voltage.a, 2, 1, Font_7x10);
-    // ssd1306_SetCursor(6 * Font_7x10.FontWidth, 2 * Font_7x10.FontHeight);
-    // ssd1306_WriteFloat(foc_motor.sector_voltage.b, 2, 1, Font_7x10);
-    // ssd1306_SetCursor(12 * Font_7x10.FontWidth, 2 * Font_7x10.FontHeight);
-    // ssd1306_WriteFloat(foc_motor.sector_voltage.c, 2, 1, Font_7x10);
 
-
-    ssd1306_SetCursor(0, 2 * Font_7x10.FontHeight);
-    sprintf(dat, "ADC: %d %d %d %d ", adc_value[0], adc_value[1], adc_value[2], adc_value[3]);
+    ssd1306_SetCursor(0, 1 * Font_7x10.FontHeight);
+    sprintf(dat, "%d %d %d %d ", adc_value[0], adc_value[1], adc_value[2], adc_value[3]);
     ssd1306_WriteString(dat, Font_7x10);
+    ssd1306_SetCursor(0, 2 * Font_7x10.FontHeight);
+    ssd1306_WriteFloat(hall_theta, 1, 2, Font_7x10);
+
+
+    printf("%d,%d,%d\n", adc_value[2], adc_value[3], (int16_t)(hall_theta*10000));
 
     ssd1306_UpdateScreen();
 
