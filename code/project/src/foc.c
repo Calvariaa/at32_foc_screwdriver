@@ -47,33 +47,30 @@ uint8_t sector_calc(const motor_t _motor) {
 
 static_vector_t sector_time(const uint8_t _sec, const motor_t _motor) {
   static_vector_t vector;
-
-  float temp = M_SQRT3 * COUNT_PERIOD / BUS_VOLTAGE; // 为了等幅值变换，已乘以2/3
-
   switch (_sec) {
     case 3: // 扇区1
-      vector.alpha = temp * _motor.b;
-      vector.beta = temp * _motor.a;
+      vector.alpha = COUNT_PERIOD * _motor.b;
+      vector.beta = COUNT_PERIOD * _motor.a;
       break;
     case 1: // 扇区2
-      vector.alpha = -temp * _motor.b;
-      vector.beta = -temp * _motor.c;
+      vector.alpha = -COUNT_PERIOD * _motor.b;
+      vector.beta = -COUNT_PERIOD * _motor.c;
       break;
     case 5: // 扇区3
-      vector.alpha = temp * _motor.a;
-      vector.beta = temp * _motor.c;
+      vector.alpha = COUNT_PERIOD * _motor.a;
+      vector.beta = COUNT_PERIOD * _motor.c;
       break;
     case 4: // 扇区4
-      vector.alpha = -temp * _motor.a;
-      vector.beta = -temp * _motor.b;
+      vector.alpha = -COUNT_PERIOD * _motor.a;
+      vector.beta = -COUNT_PERIOD * _motor.b;
       break;
     case 6: // 扇区5
-      vector.alpha = temp * _motor.c;
-      vector.beta = temp * _motor.b;
+      vector.alpha = COUNT_PERIOD * _motor.c;
+      vector.beta = COUNT_PERIOD * _motor.b;
       break;
     case 2: // 扇区6
-      vector.alpha = -temp * _motor.c;
-      vector.beta = -temp * _motor.a;
+      vector.alpha = -COUNT_PERIOD * _motor.c;
+      vector.beta = -COUNT_PERIOD * _motor.a;
       break;
     default:
       vector.alpha = 0;
@@ -166,7 +163,7 @@ void foc_control(foc_t *_foc, float iq, float hall_data) {
   _foc->sector_voltage = i_clark(_foc->i_park_vector);
   _foc->sector = sector_calc(_foc->sector_voltage);
   _foc->svpwm_vector = sector_time(_foc->sector, _foc->sector_voltage);
-  _foc->svpwm_voltage = period_calc(_foc->svpwm_vector, _foc->sector, (float)(COUNT_PERIOD / 2));
+  _foc->svpwm_voltage = period_calc(_foc->svpwm_vector, _foc->sector, (float)COUNT_PERIOD);
 
   mos_all_set(_foc->htim, (uint32_t) _foc->svpwm_voltage.a, (uint32_t) _foc->svpwm_voltage.b,
               (uint32_t) _foc->svpwm_voltage.c);

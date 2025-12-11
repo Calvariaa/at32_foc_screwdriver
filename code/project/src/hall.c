@@ -28,9 +28,9 @@ void hall_update(void) {
 
   theta += PI * 0.22;
 
-  if (theta > PI) {
-    theta -= PI;
-  } else if (theta < -PI) {
+  if (theta > PI * 2) {
+    theta -= PI * 2;
+  } else if (theta < 0) {
     theta += PI * 2;
   }
 

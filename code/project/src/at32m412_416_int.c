@@ -322,7 +322,7 @@ void DMA1_Channel1_IRQHandler(void)
 
     encoder_position = (encoder_pulse_data) / 4;
 
-    foc_control(&foc_motor, (float)encoder_position / 10.f, hall_theta);
+    foc_control(&foc_motor, (float)encoder_position / 100.f, hall_theta);
 
     gpio_bits_toggle(LED0_GPIO_PORT,LED0_PIN);
     

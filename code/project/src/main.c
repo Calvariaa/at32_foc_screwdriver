@@ -169,7 +169,7 @@ int main(void)
     ssd1306_WriteFloat(foc_motor.sector, 4, 1, Font_7x10);
 
     ssd1306_SetCursor(0, 1 * Font_7x10.FontHeight);
-    sprintf(dat, "%d %d %d %d ", adc_value[0], adc_value[1], adc_value[2], adc_value[3]);
+    sprintf(dat, "%d %d %d %d ", (int16_t)foc_motor.svpwm_voltage.a, adc_value[1], adc_value[2], adc_value[3]);
     ssd1306_WriteString(dat, Font_7x10);
     ssd1306_SetCursor(0, 2 * Font_7x10.FontHeight);
     ssd1306_WriteFloat(hall_theta, 1, 2, Font_7x10);

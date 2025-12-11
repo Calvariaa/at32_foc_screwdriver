@@ -9,8 +9,9 @@
 
 #include "at32m412_416_tmr.h"
 
-#define BUS_VOLTAGE 12
-#define COUNT_PERIOD 5624
+#define BUS_VOLTAGE 15
+#define COUNT_PERIOD 2000
+#define FOC_FREQUENCY 90000
 
 typedef struct {
         float a;
