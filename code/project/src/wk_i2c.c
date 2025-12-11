@@ -68,12 +68,15 @@ void wk_i2c1_init(void)
   gpio_init_struct.gpio_pins = GPIO_PINS_7;
   gpio_init(GPIOB, &gpio_init_struct);
 
-  i2c_init(I2C1, 0, 0xF0F03131);
+  i2c_init(I2C1, 0, 0x10F0192C);
   i2c_own_address1_set(I2C1, I2C_ADDRESS_MODE_7BIT, 0x0);
   i2c_ack_enable(I2C1, TRUE);
   i2c_clock_stretch_enable(I2C1, TRUE);
   i2c_general_call_enable(I2C1, FALSE);
   
+  /* enable i2c transmit data complete interrupt */
+  i2c_interrupt_enable(I2C1, I2C_TDC_INT, TRUE);
+
   /* add user code begin i2c1_init 2 */
 
   /* add user code end i2c1_init 2 */

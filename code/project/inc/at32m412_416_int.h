@@ -76,6 +76,7 @@ void DMA1_Channel2_IRQHandler(void);
 void TMR1_OVF_TMR10_IRQHandler(void);
 void TMR1_TRG_HALL_TMR11_IRQHandler(void);
 void TMR1_CH_IRQHandler(void);
+void I2C1_EVT_IRQHandler(void);
 /* add user code begin exported functions */
 
 /* add user code end exported functions */

@@ -31,6 +31,7 @@
 #include "at32m412_416_wk_config.h"
 #include "foc.h"
 #include "hall.h"
+#include "ssd1306.h"
 
 /* add user code end private includes */
 
@@ -417,6 +418,28 @@ void TMR1_CH_IRQHandler(void)
   /* add user code begin TMR1_CH_IRQ 1 */
 
   /* add user code end TMR1_CH_IRQ 1 */
+}
+
+/**
+  * @brief  this function handles I2C1 Event handler.
+  * @param  none
+  * @retval none
+  */
+void I2C1_EVT_IRQHandler(void)
+{
+  /* add user code begin I2C1_EVT_IRQ 0 */
+  /* add user code end I2C1_EVT_IRQ 0 */
+
+  if(i2c_interrupt_flag_get(I2C1, I2C_TDC_FLAG) != RESET)
+  {
+    /* add user code begin I2C1_TDC_FLAG */
+
+    /* add user code end I2C1_TDC_FLAG */ 
+  }
+
+  /* add user code begin I2C1_EVT_IRQ 1 */
+
+  /* add user code end I2C1_EVT_IRQ 1 */
 }
 
 /* add user code begin 1 */

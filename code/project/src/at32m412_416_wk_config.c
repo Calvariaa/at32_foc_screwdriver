@@ -213,6 +213,7 @@ void wk_nvic_config(void)
   nvic_irq_enable(TMR1_OVF_TMR10_IRQn, 0, 0);
   nvic_irq_enable(TMR1_TRG_HALL_TMR11_IRQn, 0, 0);
   nvic_irq_enable(TMR1_CH_IRQn, 0, 0);
+  nvic_irq_enable(I2C1_EVT_IRQn, 0, 0);
 }
 
 /* add user code begin 1 */
