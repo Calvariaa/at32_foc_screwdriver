@@ -325,7 +325,7 @@ void DMA1_Channel1_IRQHandler(void)
 
     encoder_position = round(encoder_pulse_data / 4.f);
 
-    if (fabsf(foc_motor.turn_vector.i_q) < foc_pid.pid_max)
+    if (!gpio_input_data_bit_read(ENC_PUSH_GPIO_PORT, ENC_PUSH_PIN) && fabsf(foc_motor.turn_vector.i_q) < foc_pid.pid_max)
       foc_motor.target_angle -= (float)encoder_position / 20000.f;
 
     foc_control(&foc_motor, hall_theta);
