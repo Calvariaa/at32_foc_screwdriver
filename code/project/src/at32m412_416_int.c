@@ -28,6 +28,8 @@
 #include "at32m412_416_int.h"
 /* private includes ----------------------------------------------------------*/
 /* add user code begin private includes */
+#include <tgmath.h>
+
 #include "at32m412_416_wk_config.h"
 #include "foc.h"
 #include "hall.h"
@@ -320,7 +322,7 @@ void DMA1_Channel1_IRQHandler(void)
     /* add user code begin DMA1_FDT1_FLAG */
     hall_update();
 
-    encoder_position = (encoder_pulse_data) / 4;
+    encoder_position = round(encoder_pulse_data / 4.f);
 
     foc_control(&foc_motor, (float)encoder_position / 100.f, hall_theta);
 
