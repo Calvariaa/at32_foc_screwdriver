@@ -33,7 +33,8 @@
 #include "at32m412_416_wk_config.h"
 #include "foc.h"
 #include "hall.h"
-#include "ssd1306.h"
+#include "pid.h"
+#include "dsp/fast_math_functions.h"
 
 /* add user code end private includes */
 
@@ -258,7 +259,7 @@ void EXINT2_IRQHandler(void)
     }
     /* clear flag */
     exint_flag_clear(EXINT_LINE_2);
-    /* add user code end EXINT_LINE_2 */ 
+    /* add user code end EXINT_LINE_2 */
   }
 
   /* add user code begin EXINT2_IRQ 1 */
@@ -298,7 +299,7 @@ void EXINT3_IRQHandler(void)
     }
     /* clear flag */
     exint_flag_clear(EXINT_LINE_3);
-    /* add user code end EXINT_LINE_3 */ 
+    /* add user code end EXINT_LINE_3 */
   }
 
   /* add user code begin EXINT3_IRQ 1 */
@@ -318,19 +319,22 @@ void DMA1_Channel1_IRQHandler(void)
   /* add user code end DMA1_Channel1_IRQ 0 */
 
   if(dma_interrupt_flag_get(DMA1_FDT1_FLAG) != RESET)
-  {   
+  {
     /* add user code begin DMA1_FDT1_FLAG */
     hall_update();
 
     encoder_position = round(encoder_pulse_data / 4.f);
 
-    foc_control(&foc_motor, (float)encoder_position / 100.f, hall_theta);
+    if (fabsf(foc_motor.turn_vector.i_q) < foc_pid.pid_max)
+      foc_motor.target_angle -= (float)encoder_position / 20000.f;
+
+    foc_control(&foc_motor, hall_theta);
 
     gpio_bits_toggle(LED0_GPIO_PORT,LED0_PIN);
-    
+
     /* handle full data transfer and clear flag */
     dma_flag_clear(DMA1_FDT1_FLAG);
-    /* add user code end DMA1_FDT1_FLAG */ 
+    /* add user code end DMA1_FDT1_FLAG */
   }
 
   /* add user code begin DMA1_Channel1_IRQ 1 */
@@ -350,11 +354,11 @@ void DMA1_Channel2_IRQHandler(void)
   /* add user code end DMA1_Channel2_IRQ 0 */
 
   if(dma_interrupt_flag_get(DMA1_FDT2_FLAG) != RESET)
-  {   
+  {
     /* add user code begin DMA1_FDT2_FLAG */
     /* handle full data transfer and clear flag */
     dma_flag_clear(DMA1_FDT2_FLAG);
-    /* add user code end DMA1_FDT2_FLAG */ 
+    /* add user code end DMA1_FDT2_FLAG */
   }
 
   /* add user code begin DMA1_Channel2_IRQ 1 */
@@ -436,7 +440,7 @@ void I2C1_EVT_IRQHandler(void)
   {
     /* add user code begin I2C1_TDC_FLAG */
 
-    /* add user code end I2C1_TDC_FLAG */ 
+    /* add user code end I2C1_TDC_FLAG */
   }
 
   /* add user code begin I2C1_EVT_IRQ 1 */

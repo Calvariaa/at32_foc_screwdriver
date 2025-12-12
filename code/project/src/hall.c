@@ -26,7 +26,7 @@ void hall_update(void) {
 
   arm_atan2_f32(sin_val, cos_val, &theta);
 
-  theta += PI * 0.22;
+  theta += PI * 0.22f;
 
   if (theta > PI * 2) {
     theta -= PI * 2;
@@ -35,4 +35,29 @@ void hall_update(void) {
   }
 
   hall_theta = theta;
+}
+
+
+float angle_prev = 0.0;
+int64_t angle_rot_dat = 0;
+int64_t get_magnet_angle_rot(float reval)
+{
+  float d_angle = reval - angle_prev;
+  if (fabsf(d_angle) > (0.8f * (PI * 2))) angle_rot_dat += (d_angle > 0.f) ? -1 : 1;
+
+  angle_prev = reval;
+  return angle_rot_dat;
+}
+
+void reset_rotations(void)
+{
+  angle_rot_dat = 0;
+}
+
+
+// 归一化角度
+float norm_angle(const float angle)
+{
+  float a = fmodf(angle, (PI * 2));
+  return a >= 0 ? a : (a + (PI * 2));
 }

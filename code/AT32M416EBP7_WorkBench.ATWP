@@ -60,10 +60,9 @@
             <ModeSub name="I2C" value="I2C"/>
         </Mode>
         <Parameters>
-            <ParametersSub name="I2C_Mode" value="I2C_Fast_Plus"/>
             <ParametersSub name="Rise_Time" value="100"/>
             <ParametersSub name="Fall_Time" value="100"/>
-            <ParametersSub name="Timing_Configuration_Value" value="0x10F0192C"/>
+            <ParametersSub name="Timing_Configuration_Value" value="0x40E0B0B0"/>
             <ParametersSub name="DualAddressMode" value="DISABLE"/>
         </Parameters>
         <Interrupts>
@@ -195,6 +194,12 @@
         <Signal SignalName="GPIO_Input" PinName="PB5">
             <Parameters name="Label" value="ENC_PUSH"/>
         </Signal>
+        <Signal SignalName="I2C1_SCL" PinName="PB6">
+            <Parameters name="GPIO_DriverCapability" value="GPIO_DRIVE_STRENGTH_STRONGER"/>
+        </Signal>
+        <Signal SignalName="I2C1_SDA" PinName="PB7">
+            <Parameters name="GPIO_DriverCapability" value="GPIO_DRIVE_STRENGTH_STRONGER"/>
+        </Signal>
         <Signal SignalName="GPIO_Output" PinName="BOOT0/PB8">
             <Parameters name="Label" value="LED0"/>
         </Signal>
@@ -246,7 +251,7 @@
     </PINInfo>
     <ProjectInfomation>
         <ProjectName>AT32M416EBP7_WorkBench</ProjectName>
-        <ProjectLocation>C:/Users/Calvaria/Documents/Code/AT32/at32_foc_screwdriver/code</ProjectLocation>
+        <ProjectLocation>C:/Users/Calvaria/Documents/Code/at32_foc_screwdriver/code</ProjectLocation>
         <ToolchainIDE>CMake</ToolchainIDE>
         <ARMCompiler>0</ARMCompiler>
         <KeepUserCode>true</KeepUserCode>

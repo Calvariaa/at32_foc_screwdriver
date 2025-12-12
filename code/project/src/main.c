@@ -145,9 +145,9 @@ int main(void)
   }
   char dat[32];
 
-  foc_init(&foc_motor, 2, TMR1);
-
   hall_init();
+  foc_init(&foc_motor, &foc_pid, 2, TMR1);
+
   /* add user code end 2 */
 
   while(1)
@@ -165,14 +165,22 @@ int main(void)
     ssd1306_SetCursor(0, 0 * Font_7x10.FontHeight);
     sprintf(dat, "ENC: %ld ", encoder_position);
     ssd1306_WriteString(dat, Font_7x10);
-    ssd1306_WriteFloat(foc_motor.set_angle, 1, 3, Font_7x10);
-    ssd1306_WriteFloat(foc_motor.sector, 4, 1, Font_7x10);
+    // ssd1306_WriteFloat(foc_motor.sector, 4, 1, Font_7x10);
+    ssd1306_WriteFloat(foc_motor.turn_vector.i_q, 1, 3, Font_7x10);
+
+    // ssd1306_SetCursor(0, 1 * Font_7x10.FontHeight);
+    // sprintf(dat, "%d %d %d %d ", (int16_t)foc_motor.svpwm_voltage.a, adc_value[1], adc_value[2], adc_value[3]);
+    // ssd1306_WriteString(dat, Font_7x10);
+    // ssd1306_SetCursor(0, 2 * Font_7x10.FontHeight);
+    ssd1306_WriteFloat(hall_theta, 1, 2, Font_7x10);
+
 
     ssd1306_SetCursor(0, 1 * Font_7x10.FontHeight);
-    sprintf(dat, "%d %d %d %d ", (int16_t)foc_motor.svpwm_voltage.a, adc_value[1], adc_value[2], adc_value[3]);
-    ssd1306_WriteString(dat, Font_7x10);
+    ssd1306_WriteFloat(foc_motor.target_angle, 1, 2, Font_7x10);
+    ssd1306_WriteFloat(foc_motor.target_angle_rotations, 5, 0, Font_7x10);
     ssd1306_SetCursor(0, 2 * Font_7x10.FontHeight);
-    ssd1306_WriteFloat(hall_theta, 1, 2, Font_7x10);
+    ssd1306_WriteFloat(foc_motor.current_angle, 1, 2, Font_7x10);
+    ssd1306_WriteFloat(foc_motor.current_angle_rotations, 5, 0, Font_7x10);
 
     // printf("%d,%d,%d\n", adc_value[2], adc_value[3], (int16_t)(hall_theta*10000));
 
