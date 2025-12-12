@@ -3,7 +3,7 @@
 #include "at32m412_416_wk_config.h"
 #include "foc.h"
 
-pid_param_t foc_pid = PID_CREATE(0.7, 0.0, 0., 0.8, 10., 0.8, 0, 1.2);
+pid_param_t foc_pid = PID_CREATE(1.2, 0.0, 0., 0.8, 10., 0.8, 0, 1.2);
 
 float pid_solve(pid_param_t *pid, const float error)
 {
